@@ -45,6 +45,7 @@ export class AutenticarComponent implements OnInit {
         );
        
         this.router.navigate(['/menu-principal']);
+        
       }
     );
   }

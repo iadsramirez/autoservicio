@@ -1,17 +1,49 @@
 <div class="row">
-    <div class="col-md-12 col-xl-12 card text-white bg-primary">
-      <h5 style="color: white;">TOTALES</h5>
-      <hr>
-      <app-card [hidHeader]="true">
-        <h5 style="color: white;"  class="card-title">Card title</h5>
-        <h6 style="color: white;"  class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      </app-card>
+  <app-card cardTitle="TOTALES" class="col-md-9 col-xl-9" [options]="false" *ngFor="let item of objetoTotales">
+    <button type="button" class="btn btn-primary">DEVENGADO:<span
+        class="badge badge-light">${{item.DEVENGADO}}</span></button>
+    <button type="button" class="btn btn-primary ml-2">DEDUCCIONES:<span
+        class="badge badge-light">${{item.DEDUCCIONES}}</span></button>
+    <button type="button" class="btn btn-info ml-2">LIQUIDO:<span
+        class="badge badge-light">${{item.LIQUIDO}}</span></button>
+  </app-card>
+</div>
+
+<div class="row">
+
+  <app-card class="col-md-12 col-xl-12" [options]="false">
+
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead style="color: white;background-color: blue;">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Planilla</th>
+            <th scope="col">Numero de Planilla</th>
+            <th scope="col">Año</th>
+            <th scope="col">Mes</th>
+            <th scope="col">Empleado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let planilla of listadoProgramacionesCerradas  | paginate: { itemsPerPage: 10, currentPage: p }  ; index as i">
+            <td>{{i+1}}</td>
+            <td>{{planilla.NOM_TIPOPLA}}</td>
+            <td>{{planilla.NUM_PLANILLA}}</td>
+            <td>{{planilla.ANIO}}</td>
+            <td>{{planilla.MES}}</td>
+            <td>{{planilla.COD_EMP}}</td>
+            <td>
+              
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
     </div>
 
+  </app-card>
 
-  
-  </div>
-  
-   
- 
+</div>

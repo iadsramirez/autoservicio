@@ -155,6 +155,8 @@ export class ConfigurationComponent implements OnInit {
   // change main layout
   setLayout(layout) {
     this.isConfig = true;
+    if(document.querySelector('.pcoded-navbar').classList){
+
     document.querySelector('.pcoded-navbar').classList.remove('menu-light');
     document.querySelector('.pcoded-navbar').classList.remove('menu-dark');
     document.querySelector('.pcoded-navbar').classList.remove('navbar-dark');
@@ -172,9 +174,20 @@ export class ConfigurationComponent implements OnInit {
 
       document.querySelector('body').classList.add('gradient-dark');
     }
+
+
+    }
+    
+
+
+
     if (layout === 'reset') {
       this.reset();
     }
+
+
+
+
   }
 
   reset() {

@@ -32,4 +32,13 @@ export class AutogestionService {
 
 
 
+  obtenerProgramacionesCerradas(cia:number,emp:number):Observable<any>{
+    return this.http.get(environment.baseURl+'programacionPlanilla/'+cia+'/'+emp);
+    
+  }
+
+
+
+
 }
+
