@@ -39,6 +39,15 @@ export class AutogestionService {
 
 
 
+  obtenerDetallePlanilla(cia:number,anio:number,mes:number
+    ,tipoPla:number,numPla:number,codEmp:number
+    ):Observable<any>{
+    return this.http.get(environment.baseURl+'detallePlanilla/'+cia+'/'+anio+'/'+mes+'/'+tipoPla+'/'+numPla+'/'+codEmp);
+    
+  }
+
+
+
 
 }
 

@@ -10,6 +10,7 @@ export class PlanillaComponent implements OnInit {
   empleado: any;
   objetoTotales: any;
   listadoProgramacionesCerradas: Array<any>;
+  listaDetallePlanilla:Array<any>=[];
   p: number = 1;
 
   constructor(private autoGestionService: AutogestionService) {
@@ -28,7 +29,7 @@ export class PlanillaComponent implements OnInit {
       );
 
 
-  this.llenarTablaProgramacionesCerradas(this.empleado[0].COD_CIA,this.empleado[0].COD_EMP);
+    this.llenarTablaProgramacionesCerradas(this.empleado[0].COD_CIA, this.empleado[0].COD_EMP);
 
 
   }
@@ -50,6 +51,22 @@ export class PlanillaComponent implements OnInit {
       }
     );
   }
+
+
+
+  llenarDetalle(data: any) {
+    //console.log(JSON.stringify(data));
+    this.listaDetallePlanilla=[];
+    this.autoGestionService.obtenerDetallePlanilla(data.COD_CIA, data.ANIO,
+      data.MES, data.COD_TIPOPLA, data.NUM_PLANILLA, data.COD_EMP).subscribe(
+        valor=>{
+          this.listaDetallePlanilla=valor;
+          console.log('---------------');
+          console.log(JSON.stringify(valor));
+        }
+      );
+  }
+
 
 
 }
