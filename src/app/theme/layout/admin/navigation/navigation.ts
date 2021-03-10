@@ -284,30 +284,18 @@ const MenuApp = [
         icon: 'feather icon-home',
         breadcrumbs: false
       },
-      {
-        id: 'page-layouts',
-        title: 'Acciones de Personal',
-        type: 'collapse',
-        icon: 'feather icon-layout',
-        children: [
-          {
-            id: 'vertical',
-            title: 'Vertical',
-            type: 'item',
-            url: '/layout/static',
-            target: true
-          },
-          {
-            id: 'horizontal',
-            title: 'Horizontal',
-            type: 'item',
-            url: '/layout/horizontal',
-            target: true
-          }
-        ]
-      }
+       {
+        id: 'dashboard',
+        title: 'Accion Personal',
+        type: 'item',
+        url: '/accionPersonal',
+        icon: 'feather icon-sidebar',
+        breadcrumbs: false
+      },
+      
     ]
   }
+
 ];
 
 

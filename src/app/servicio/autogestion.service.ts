@@ -21,6 +21,11 @@ export class AutogestionService {
   }
 
 
+  obtenerAccionesEmpleado(cia:any,codEmp:any,usr:any):Observable<any>{
+    return this.http.get(environment.baseURl+'accionesPersonales/'+cia+'/'+codEmp+'/'+usr);
+  }
+
+
   obtenerEmpleado(usuario:string):Observable<any>{
     return this.http.get(environment.baseURl+'usuarios/'+usuario);
   }

@@ -2,6 +2,8 @@ import {Component, DoCheck, OnInit} from '@angular/core';
 import {NgbDropdownConfig} from '@ng-bootstrap/ng-bootstrap';
 import {animate, style, transition, trigger} from '@angular/animations';
 import {GradientConfig} from '../../../../../app-config';
+import { Router } from '@angular/router';
+import { AutogestionService } from 'src/app/servicio/autogestion.service';
 
 @Component({
   selector: 'app-nav-right',
@@ -34,11 +36,17 @@ export class NavRightComponent implements OnInit, DoCheck {
   public chatMessage: boolean;
   public friendId: boolean;
   public gradientConfig: any;
+  public usuario:any;
+  tempuser:Array<any>;
 
-  constructor() {
+  constructor(private router:Router,private autoServicio:AutogestionService) {
     this.visibleUserList = false;
     this.chatMessage = false;
     this.gradientConfig = GradientConfig.config;
+    this.tempuser=JSON.parse(localStorage.getItem('empleadoSession'));
+    this.usuario=this.tempuser[0];
+    console.log('Valores de usuario logeado'+JSON.stringify(this.usuario));
+
   }
 
   ngOnInit() { }
@@ -55,4 +63,14 @@ export class NavRightComponent implements OnInit, DoCheck {
       this.gradientConfig['rtl-layout'] = false;
     }
   }
+
+
+
+
+salir(){
+  this.autoServicio.logeado=false;
+  this.router.navigateByUrl('/')
+}
+
+
 }

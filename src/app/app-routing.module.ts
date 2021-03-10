@@ -57,6 +57,10 @@ const routes: Routes = [
       {
         path: 'planilla',
         loadChildren: () => import('./demo/pages/planilla/planilla.module').then(module => module.PlanillaModule)
+      },
+      {
+        path: 'accionPersonal',
+        loadChildren: () => import('./demo/pages/accion-personal/accionpersonal.module').then(module => module.AccionPersonalModule)
       }
     ]
   },
