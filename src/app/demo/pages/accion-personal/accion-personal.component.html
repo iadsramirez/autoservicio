@@ -1,11 +1,9 @@
-
-
 <div class="row">
-    <div class="col-sm-12">
-        <button class="btn btn-primary" data-toggle="modal" (click)="mySmallModalLabel.show()" >
-            <i class="feather icon-plus-circle"></i>&nbsp;<strong>Agregar Nueva Accion</strong> 
-        </button>
-    </div>
+  <div class="col-sm-12">
+    <button class="btn btn-primary" data-toggle="modal" (click)="mySmallModalLabel.show()">
+      <i class="feather icon-plus-circle"></i>&nbsp;<strong>Agregar Nueva Accion</strong>
+    </button>
+  </div>
 
 </div>
 
@@ -14,43 +12,42 @@
 <div class="row my-1">
 
 
-    <app-card cardTitle="Lista Acciones de Personal" class="col-md-12 col-xl-12 bg-primary" [options]="false">
+  <app-card cardTitle="Lista Acciones de Personal" class="col-md-12 col-xl-12 bg-primary" [options]="false">
 
-        <div class="table-responsive">
-          <table class="table table-hover">
-            <thead  class="bg-primary">
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Tipo Accion</th>
-                <th scope="col">Observacion</th>
-                <th scope="col">Fecha</th>
-                <th scope="col">Estado</th>
-                <th scope="col">Detalle</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let accion of listadoAccion  | paginate: { itemsPerPage: 10, currentPage: p }  ; index as i">
-                <td>{{i+1}}</td>
-                <td>{{accion.NOM_TIPOACCION}}</td>
-                <td>{{accion.OBSERVACION}}</td>
-                <td>{{accion.FECHA | date: 'mediumDate'}}</td>
-                <td>{{accion.STATUS}}</td>
-                <td>
-                  <button class="btn btn-primary" 
-                    data-toggle="modal" >
-                    <i class="fa fa-check" aria-hidden="true"></i>
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-    
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead class="bg-primary">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Tipo Accion</th>
+            <th scope="col">Observacion</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Detalle</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let accion of listadoAccion  | paginate: { itemsPerPage: 10, currentPage: p }  ; index as i">
+            <td>{{i+1}}</td>
+            <td>{{accion.NOM_TIPOACCION}}</td>
+            <td>{{accion.OBSERVACION}}</td>
+            <td>{{accion.FECHA | date: 'mediumDate'}}</td>
+            <td>{{accion.STATUS}}</td>
+            <td>
+              <button class="btn btn-primary" data-toggle="modal">
+                <i class="fa fa-check" aria-hidden="true"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
-          <pagination-controls (pageChange)="p = $event"></pagination-controls>
-    
-        </div>
-    
-      </app-card>
+
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
+    </div>
+
+  </app-card>
 
 </div>
 
@@ -66,20 +63,139 @@
 
 
 <app-ui-modal #mySmallModalLabel [hideFooter]="true" [dialogClass]="'modal-lg'">
-    <div class="app-modal-header">
-      <h5 class="modal-title">Ingreso de Accion</h5>
-      <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="mySmallModalLabel.hide()"><span aria-hidden="true">&times;</span></button>
-    </div>
-    <div class="app-modal-body">
-      <form [formGroup]="registerAccionForm">
-        <app-card cardTitle="Input Group" [options]="false">
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">@</span>
-              </div>
-              <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
-            </div>
-          </app-card>
-      </form>
-    </div>
-  </app-ui-modal>
+  <div class="app-modal-header">
+    <h5 class="modal-title">Ingreso de Accion</h5>
+    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close"
+      (click)="mySmallModalLabel.hide()"><span aria-hidden="true">&times;</span></button>
+  </div>
+  <div class="app-modal-body">
+    <form [formGroup]="registerAccionForm">
+      <app-card cardTitle="Datos Accion" [options]="false">
+        <div class="input-group mb-3">
+          <label class="col-12">Fecha Solicitud</label>
+
+          <input type="text" disabled formControlName="fechaSol" ngbDatepicker #d="ngbDatepicker" (focus)="d.open()" name="date_start" class="form-control"/>
+
+        </div>
+
+        <div class="input-group mb-3">
+          <label class="col-12">Accion de Personal</label>
+          
+          <div class="input-group-append">
+            <label class="input-group-text" for="inputGroupSelect02">Opciones</label>
+          </div>
+          <select formControlName="accion" class="custom-select" id="inputGroupSelect02"
+          (change)="tiposAccionChange($event.target.value)">
+            <option *ngFor="let tipoAccion of listadoTipoAccion"  [value]="tipoAccion.COD_TIPOACCION" >{{tipoAccion.NOM_TIPOACCION}}</option>
+          </select>
+          
+        </div>
+
+        <div class="input-group mb-3" *ngIf="mostrarTipos" >
+          <label class="col-12">Tipo Accion</label>
+          
+          <div class="input-group-append">
+            <label class="input-group-text" for="inputGroupSelect02">Opciones</label>
+          </div>
+          <select formControlName="tipoAccion" class="custom-select" id="inputGroupSelect02">
+            <option *ngFor="let noAfecta of listaNoAfectaPlanilla"  [value]="noAfecta.COD_TIPOACCION" >{{noAfecta.NOM_TIPOACCION}}</option>
+          </select>
+          
+        </div>
+
+
+        <div class="input-group mb-3">
+          <label class="col-12">Empleado</label>
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1"><i class="fa fa-user" aria-hidden="true"></i></span>
+          </div>
+          <input type="text" disabled formControlName="empleado" class="form-control" placeholder="Username" aria-label="Username"
+            aria-describedby="basic-addon1">
+        </div>
+
+        <div class="input-group mb-3">
+          <label class="col-12">Detalle Accion</label>
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1"><i class="fa fa-comments" aria-hidden="true"></i></span>
+          </div>
+          <textarea style = "text-transform:capitalize;" formControlName="detalle"  type="text" rows="4" cols="30" class="form-control" placeholder="" 
+            aria-describedby="basic-addon1">
+          </textarea>
+        </div>
+
+        <div class="input-group mb-3">
+          <label class="col-12">Observacion</label>
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1"><i class="fa fa-comments" aria-hidden="true"></i></span>
+          </div>
+          <textarea style = "text-transform:capitalize;" formControlName="observacion"  type="text" rows="4" cols="30" class="form-control" placeholder="" 
+            aria-describedby="basic-addon1">
+          </textarea>
+        </div>
+
+
+        <div class="input-group mb-3">
+          <label class="col-12">Fecha inicial</label>
+
+          <input type="text"  formControlName="fechaInicial" ngbDatepicker #d1="ngbDatepicker" (focus)="d1.open()" name="date_start" class="form-control"/>
+
+        </div>
+
+        <div class="input-group mb-3">
+          <label class="col-12">Fecha final</label>
+
+          <input  (ngModelChange)="changeDateFinal($event)" type="text"  formControlName="fechaFinal" ngbDatepicker #d2="ngbDatepicker" (focus)="d2.open()" name="date_start" class="form-control"/>
+
+        </div>
+
+        
+        <div class="input-group mb-3" *ngIf="mostrarHora">
+          <label class="col-12">Fecha Inicio Real</label>
+
+          <input  type="text"  formControlName="fechaInicioReal" ngbDatepicker #d5="ngbDatepicker" (focus)="d5.open()" name="date_start" class="form-control"/>
+
+        </div>
+
+
+        <div class="input-group mb-3" *ngIf="mostrarHora" >
+          <label class="col-12">Fecha Final Real</label>
+
+          <input  (ngModelChange)="changeCalculoDias($event)" type="text"  formControlName="fechaFinReal" ngbDatepicker #d6="ngbDatepicker" (focus)="d6.open()" name="date_start" class="form-control"/>
+
+        </div>
+
+        <div class="input-group mb-3" *ngIf="mostrarHora" >
+          <label class="col-12">Dias</label>
+
+          <input type="number"  formControlName="dias"  class="form-control"/>
+
+        </div>
+        
+        <div class="input-group mb-3" *ngIf="mostrarHora">
+          <label class="col-12">Horas : <strong>{{horas}}</strong></label>
+          <button type="button" class="btn btn-info" (click)="agregarHora(1)">1hr</button>
+          <button type="button" class="btn btn-info" (click)="agregarHora(2)">2hr</button>
+          <button type="button" class="btn btn-info" (click)="agregarHora(3)" >3hr</button>
+          <button type="button" class="btn btn-info" (click)="agregarHora(4)">4hr</button>
+          <button type="button" class="btn btn-info" (click)="agregarHora(5)" >5hr</button>
+          <button type="button" class="btn btn-info" (click)="agregarHora(6)" >6hr</button>
+          <button type="button" class="btn btn-info" (click)="agregarHora(7)" >7hr</button>
+          <button type="button" class="btn btn-info" (click)="agregarHora(8)">8hr</button>
+
+        </div>
+
+
+  
+        <div class="card">
+          
+          <div class="card-footer">
+            <button class="btn btn-primary sm">
+              Guardar
+            </button>
+          </div>
+        </div>
+
+      </app-card>
+    </form>
+  </div>
+</app-ui-modal>

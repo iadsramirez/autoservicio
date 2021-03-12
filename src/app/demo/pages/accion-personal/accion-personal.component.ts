@@ -12,6 +12,8 @@ export class AccionPersonalComponent implements OnInit {
   listadoAccion: Array<any>;
   p: number = 1;
   registerAccionForm: FormGroup;
+  listadoTipoAccion: Array<any>;
+  listaNoAfectaPlanilla:Array<any>;
 
 
   constructor(private autoGestion: AutogestionService, private formBuilder: FormBuilder) {
@@ -19,10 +21,26 @@ export class AccionPersonalComponent implements OnInit {
 
 
     this.registerAccionForm = this.formBuilder.group({
-      title: ['', Validators.required],
+      fechaSol: [, Validators.required],
+      empleado: [, Validators.required],
+      codEmp: [],
+      detalle: [],
+      observacion: [],
+      accion:[],
+      tipoAccion:[],
+      fechaInicial:[,[Validators.required]],
+      fechaFinal:[,[Validators.required]],
+      dias:[],
+      horas:[],
+      fechaInicioReal:[],
+      fechaFinReal:[]
     });
 
 
+
+
+
+    this.inicializarForm();
 
 
     this.autoGestion.logeado = true;
@@ -32,13 +50,101 @@ export class AccionPersonalComponent implements OnInit {
         acciones => {
           this.listadoAccion = acciones;
           console.log(this.listadoAccion.length);
-          console.log(JSON.stringify(acciones));
+          //console.log(JSON.stringify(acciones));
         }
       );
+
+    // console.log('this.empleado[0].USUARIO'+this.empleado[0].USUARIO);
+    this.autoGestion.obtenerTipoAccion(this.empleado[0].COD_CIA, this.empleado[0].USUARIO)
+      .subscribe(
+        tipoAccion => {
+          console.log(JSON.stringify(tipoAccion));
+          this.listadoTipoAccion = tipoAccion;
+
+        }
+      )
+
+
+
+
+      this.autoGestion.obtenerTipoAccionNoAfectaPlanilla(this.empleado[0].COD_CIA, this.empleado[0].USUARIO)
+      .subscribe(
+        tipoAccion => {
+          //console.log(JSON.stringify(tipoAccion));
+          this.listaNoAfectaPlanilla = tipoAccion;
+
+        }
+      )
+
+
+
 
   }
 
   ngOnInit(): void {
   }
 
+  inicializarForm() {
+    let empleado = JSON.parse(localStorage.getItem('empleadoSession'));
+    console.log('empleado en session' + JSON.stringify(empleado));
+    let fechaActual = new Date();
+
+    const fecha = { day: fechaActual.getDate(), month: fechaActual.getMonth() + 1, year: fechaActual.getFullYear() };
+
+    this.registerAccionForm.get('fechaSol').setValue(fecha);
+    this.registerAccionForm.get('empleado').setValue(empleado[0].NOMBRE);
+    this.registerAccionForm.get('codEmp').setValue(empleado[0].COD_EMP);
+
+
+  }
+
+  mostrarTipos: boolean = false;
+  tiposAccionChange(data: any) {
+    console.log('lo que viene' + data);
+
+    if (data == 0) {
+      this.mostrarTipos = true;
+    }else{
+      this.mostrarTipos=false;
+    }
+  }
+
+
+mostrarHora:boolean=false;
+
+  changeDateFinal(valor:any){
+    console.log('this.registerAccionForm.get(fechaInicial).value:'+JSON.stringify(this.registerAccionForm.get('fechaInicial').value));
+    console.log('valor de la fecha'+JSON.stringify(valor));
+
+    let valor1:any=this.registerAccionForm.get('fechaInicial').value;
+    let valor2:any=valor;
+    if((valor1.year==valor2.year) && (valor1.month==valor2.month) && (valor1.day==valor2.day) ){
+     
+      this.mostrarHora=true;
+    }else{
+      this.mostrarHora=false;
+    }
+
+  }
+
+  changeCalculoDias(valor:any){
+    let valor1:any=this.registerAccionForm.get('fechaInicioReal').value;
+    let valor2:any=valor;
+
+    let fecha1=new Date(Number(valor1.year),Number(valor1.month),Number(valor1.day));
+     let fecha2=new Date(Number(valor2.year),Number(valor2.month),Number(valor2.day));
+     let total:number=fecha2.getTime()-fecha1.getTime();
+     if(total<0){
+       total=total*(-1);
+     }
+     
+      this.registerAccionForm.get('dias').setValue(total/(1000*60*60*24));
+
+  }
+
+
+  horas:number;
+  agregarHora(valor:number){
+   this.horas=valor; 
+  }
 }

@@ -15,6 +15,16 @@ export class AutogestionService {
   constructor(private http: HttpClient) { }
 
 
+  obtenerTipoAccionNoAfectaPlanilla(cia:any,usuario:any):Observable<any>{
+    return this.http.get(environment.baseURl+'accionesNoAfectaPlanilla/'+cia+'/'+usuario);
+  }
+
+
+  obtenerTipoAccion(cia:any,usuario:any):Observable<any>{
+    return this.http.get(environment.baseURl+'tiposAcciones/'+cia+'/'+usuario);
+  }
+
+
   validaUsr(usuario: string, pass: string): Observable<any> {
     return this.http.get(`http://138.128.245.244:8080/ServicioApp/webresources/api/verificar/${usuario}/${pass}`);
 
