@@ -15,6 +15,11 @@ export class AutogestionService {
   constructor(private http: HttpClient) { }
 
 
+  obtenerTipoAccionClinica(cia:any,codEmp:any,usuario:any):Observable<any>{
+    return this.http.get(environment.baseURl+'accionesPersonales/'+cia+'/'+codEmp+'/'+usuario);
+  }
+
+
   obtenerTipoAccionNoAfectaPlanilla(cia:any,usuario:any):Observable<any>{
     return this.http.get(environment.baseURl+'accionesNoAfectaPlanilla/'+cia+'/'+usuario);
   }
@@ -49,7 +54,11 @@ export class AutogestionService {
 
   obtenerProgramacionesCerradas(cia:number,emp:number):Observable<any>{
     return this.http.get(environment.baseURl+'programacionPlanilla/'+cia+'/'+emp);
-    
+
+  }
+
+  guardar(data:any):Observable<any>{
+return this.http.post(environment.baseURl+'accionesPersonales/',data);
   }
 
 
@@ -58,7 +67,7 @@ export class AutogestionService {
     ,tipoPla:number,numPla:number,codEmp:number
     ):Observable<any>{
     return this.http.get(environment.baseURl+'detallePlanilla/'+cia+'/'+anio+'/'+mes+'/'+tipoPla+'/'+numPla+'/'+codEmp);
-    
+
   }
 
 

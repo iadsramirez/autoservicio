@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AutogestionService } from 'src/app/servicio/autogestion.service';
+//import Swal from 'sweetalert2/dist/sweetalert2.js';
+
+import 'sweetalert2/src/sweetalert2.scss'
+
+
 
 @Component({
   selector: 'app-accion-personal',
@@ -119,7 +124,7 @@ mostrarHora:boolean=false;
     let valor1:any=this.registerAccionForm.get('fechaInicial').value;
     let valor2:any=valor;
     if((valor1.year==valor2.year) && (valor1.month==valor2.month) && (valor1.day==valor2.day) ){
-     
+
       this.mostrarHora=true;
     }else{
       this.mostrarHora=false;
@@ -137,7 +142,7 @@ mostrarHora:boolean=false;
      if(total<0){
        total=total*(-1);
      }
-     
+
       this.registerAccionForm.get('dias').setValue(total/(1000*60*60*24));
 
   }
@@ -145,6 +150,30 @@ mostrarHora:boolean=false;
 
   horas:number;
   agregarHora(valor:number){
-   this.horas=valor; 
+   this.horas=valor;
+  }
+
+  guardar(){
+    const fechas=this.registerAccionForm.get('fechaSol').value;
+
+    let fecha=new Date(Number(fechas.year),Number(fechas.month),Number(fechas.day));
+
+    const objeto={
+
+      cia:this.empleado[0].COD_CIA,
+      emp:this.empleado[0].COD_EMP,
+      tipoAcc:this.registerAccionForm.get('accion').value,
+      fecha:fecha,
+      observacion:this.registerAccionForm.get('observacion').value,
+      usrC:this.empleado[0].USUARIO
+    };
+
+    this.autoGestion.guardar(objeto).subscribe(
+      data=>{
+        console.log('RESPUESTA GUARDADO'+JSON.stringify(data));
+       // Swal.fire('Datos Guardado con exito');
+      }
+    )
+
   }
 }

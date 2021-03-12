@@ -8,6 +8,7 @@ import { AccionPersonalRoutingModule } from './accionpersonal-routing.module';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+
 @NgModule({
   declarations: [AccionPersonalComponent],
   imports: [NgxPaginationModule,FormsModule,NgbModule.forRoot(),

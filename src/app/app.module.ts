@@ -29,6 +29,7 @@ import { ToggleFullScreenDirective } from './theme/shared/full-screen/toggle-ful
 import { NavigationItem } from './theme/layout/admin/navigation/navigation';
 import { NgbButtonsModule, NgbDropdownModule, NgbTabsetModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { AutenticarComponent } from './demo/pages/autenticar/autenticar.component';
+import { CitasComponent } from './demo/pages/citas/citas.component';
 
 
 @NgModule({
@@ -51,6 +52,7 @@ import { AutenticarComponent } from './demo/pages/autenticar/autenticar.componen
     ConfigurationComponent,
     ToggleFullScreenDirective,
     AutenticarComponent,
+    CitasComponent,
   ],
   imports: [
     BrowserModule,
