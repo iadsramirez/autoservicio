@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { AutogestionService } from 'src/app/servicio/autogestion.service';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
+
+import 'sweetalert2/src/sweetalert2.scss';
 //import Swal from 'sweetalert2/dist/sweetalert2.js';
 
-import 'sweetalert2/src/sweetalert2.scss'
+//import 'sweetalert2/src/sweetalert2.scss'
 
 
 
@@ -35,7 +39,7 @@ export class AccionPersonalComponent implements OnInit {
       tipoAccion:[],
       fechaInicial:[,[Validators.required]],
       fechaFinal:[,[Validators.required]],
-      dias:[],
+      dias:[0,[]],
       horas:[],
       fechaInicioReal:[],
       fechaFinReal:[]
@@ -132,9 +136,19 @@ mostrarHora:boolean=false;
 
   }
 
+
+
   changeCalculoDias(valor:any){
-    let valor1:any=this.registerAccionForm.get('fechaInicioReal').value;
+    let valor1:any=this.registerAccionForm.get('fechaInicial').value;
     let valor2:any=valor;
+
+    if((valor1.year==valor2.year) && (valor1.month==valor2.month) && (valor1.day==valor2.day) ){
+
+      this.mostrarHora=true;
+    }else{
+      this.mostrarHora=false;
+    }
+
 
     let fecha1=new Date(Number(valor1.year),Number(valor1.month),Number(valor1.day));
      let fecha2=new Date(Number(valor2.year),Number(valor2.month),Number(valor2.day));
@@ -142,6 +156,11 @@ mostrarHora:boolean=false;
      if(total<0){
        total=total*(-1);
      }
+
+     if(total==0){
+      total=86400000;
+     }
+
 
       this.registerAccionForm.get('dias').setValue(total/(1000*60*60*24));
 
@@ -155,6 +174,7 @@ mostrarHora:boolean=false;
 
   guardar(){
     const fechas=this.registerAccionForm.get('fechaSol').value;
+    const fechasFinal=this.registerAccionForm.get('fechaFinal').value;
 
     let fecha=new Date(Number(fechas.year),Number(fechas.month),Number(fechas.day));
 
@@ -163,17 +183,40 @@ mostrarHora:boolean=false;
       cia:this.empleado[0].COD_CIA,
       emp:this.empleado[0].COD_EMP,
       tipoAcc:this.registerAccionForm.get('accion').value,
-      fecha:fecha,
+      fecha:String(fechas.day)+'/'+String(fechas.month)+'/'+String(fechas.year),
       observacion:this.registerAccionForm.get('observacion').value,
-      usrC:this.empleado[0].USUARIO
+      usrC:this.empleado[0].USUARIO,
+      estado:'A',
+      fechaIni:String(fechas.day)+'/'+String(fechas.month)+'/'+String(fechas.year),
+      fechaFin:String(fechasFinal.day)+'/'+String(fechasFinal.month)+'/'+String(fechasFinal.year),
+      dias:Number(this.registerAccionForm.get('dias').value),
     };
 
+    console.log('json save'+JSON.stringify(objeto))
     this.autoGestion.guardar(objeto).subscribe(
       data=>{
-        console.log('RESPUESTA GUARDADO'+JSON.stringify(data));
-       // Swal.fire('Datos Guardado con exito');
+        //console.log('RESPUESTA GUARDADO'+JSON.stringify(data));
+        Swal.fire('Datos Guardados');
+
+        this.obtenerLista();
+        //this.toastr.success('Datos Guardado', '');
       }
     )
 
   }
+
+
+  obtenerLista(){
+    this.autoGestion.obtenerAccionesEmpleado(this.empleado[0].COD_CIA, this.empleado[0].COD_EMP,
+      this.empleado[0].USUARIO).subscribe(
+        acciones => {
+          this.listadoAccion = acciones;
+          console.log(this.listadoAccion.length);
+          //console.log(JSON.stringify(acciones));
+        }
+      );
+  }
+
+
+
 }

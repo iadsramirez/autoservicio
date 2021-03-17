@@ -61,6 +61,14 @@ const routes: Routes = [
       {
         path: 'accionPersonal',
         loadChildren: () => import('./demo/pages/accion-personal/accionpersonal.module').then(module => module.AccionPersonalModule)
+      },
+      {
+        path: 'cita',
+        loadChildren: () => import('./demo/pages/citas/cita.module').then(module => module.CitaModule)
+      },
+      {
+        path: 'datos',
+        loadChildren: () => import('./demo/pages/datos/datos.module').then(module => module.DatosModule)
       }
     ]
   },

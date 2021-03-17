@@ -1,0 +1,39 @@
+// collapse toggle
+::ng-deep .collapse {
+    transition: max-height .55s, opacity .35s ease-in-out;
+    max-height: 0;
+    opacity: 0;
+    display: block !important;
+  
+    &.show {
+      max-height: 100rem;
+      opacity: 1;
+    }
+  }
+  
+  ::ng-deep .accordion {
+    .card {
+      margin-bottom: 0 !important;
+      border-bottom: 1px solid rgba(0, 0, 0, .04) !important;
+  
+      .card-header {
+        // padding-top: 0;
+        padding: 0;
+        color: white;
+  
+        button {
+          padding: 1.2rem;
+          width: 100%;
+  
+          span {
+            float: left;
+            font-size: 1.2rem;
+          }
+        }
+      }
+  
+      .card-body {
+        padding: 1rem;
+      }
+    }
+  }

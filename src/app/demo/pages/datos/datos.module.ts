@@ -3,19 +3,20 @@ import { CommonModule } from '@angular/common';
 
 import {SharedModule} from '../../../theme/shared/shared.module';
 import {NgxPaginationModule} from 'ngx-pagination';
-import { AccionPersonalComponent } from './accion-personal.component';
-import { AccionPersonalRoutingModule } from './accionpersonal-routing.module';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 //import { ToastrModule } from 'ngx-toastr';
 //import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DatosComponent } from './datos.component';
+import { DatosRoutingModule } from './datos-routing.module';
+import {AccordionModule} from "ng2-accordion";
 
 @NgModule({
-  declarations: [AccionPersonalComponent],
+  declarations: [DatosComponent],
   imports: [NgxPaginationModule,FormsModule,NgbModule.forRoot(),
-    CommonModule,
-    AccionPersonalRoutingModule,
+    CommonModule,DatosRoutingModule,AccordionModule
+    ,
     SharedModule
   ]
 })
-export class AccionPersonalModule { }
+export class DatosModule { }

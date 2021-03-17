@@ -31,8 +31,11 @@
             <td>{{i+1}}</td>
             <td>{{accion.NOM_TIPOACCION}}</td>
             <td>{{accion.OBSERVACION}}</td>
-            <td>{{accion.FECHA | date: 'mediumDate'}}</td>
-            <td>{{accion.STATUS}}</td>
+            <td>{{accion.FECHA }}</td>
+            <td>
+              <span *ngIf="accion.STATUS =='A'">Activo</span>
+              <span *ngIf="accion.STATUS =='G'" >Generado</span>
+            </td>
             <td>
               <button class="btn btn-primary" data-toggle="modal">
                 <i class="fa fa-check" aria-hidden="true"></i>
@@ -144,25 +147,10 @@
         <div class="input-group mb-3">
           <label class="col-12">Fecha final</label>
 
-          <input  (ngModelChange)="changeDateFinal($event)" type="text"  formControlName="fechaFinal" ngbDatepicker #d2="ngbDatepicker" (focus)="d2.open()" name="date_start" class="form-control"/>
+          <input  (ngModelChange)="changeCalculoDias($event)" type="text"  formControlName="fechaFinal" ngbDatepicker #d2="ngbDatepicker" (focus)="d2.open()" name="date_start" class="form-control"/>
 
         </div>
 
-        
-        <div class="input-group mb-3" *ngIf="mostrarHora">
-          <label class="col-12">Fecha Inicio Real</label>
-
-          <input  type="text"  formControlName="fechaInicioReal" ngbDatepicker #d5="ngbDatepicker" (focus)="d5.open()" name="date_start" class="form-control"/>
-
-        </div>
-
-
-        <div class="input-group mb-3" *ngIf="mostrarHora" >
-          <label class="col-12">Fecha Final Real</label>
-
-          <input  (ngModelChange)="changeCalculoDias($event)" type="text"  formControlName="fechaFinReal" ngbDatepicker #d6="ngbDatepicker" (focus)="d6.open()" name="date_start" class="form-control"/>
-
-        </div>
 
         <div class="input-group mb-3" *ngIf="mostrarHora" >
           <label class="col-12">Dias</label>
@@ -189,7 +177,7 @@
         <div class="card">
           
           <div class="card-footer">
-            <button class="btn btn-primary sm">
+            <button class="btn btn-primary sm" (click)="guardar()" (click)="mySmallModalLabel.hide()">
               Guardar
             </button>
           </div>

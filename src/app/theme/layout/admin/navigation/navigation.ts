@@ -292,6 +292,22 @@ const MenuApp = [
         icon: 'feather icon-sidebar',
         breadcrumbs: false
       },
+      {
+       id: 'dashboard',
+       title: 'Citas',
+       type: 'item',
+       url: '/cita',
+       icon: 'feather icon-sidebar',
+       breadcrumbs: false
+     },
+     {
+      id: 'dashboard',
+      title: 'Datos',
+      type: 'item',
+      url: '/datos',
+      icon: 'feather icon-sidebar',
+      breadcrumbs: false
+    },
       
     ]
   }

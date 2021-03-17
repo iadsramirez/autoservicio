@@ -1,0 +1,109 @@
+<div class="card">
+
+    <div class="card-body">
+     
+        <ngb-accordion #acc="ngbAccordion" activeIds="config-panel-one" type="info" >
+            <ngb-panel  title="Ficha Empleado" id="config-panel-one">
+                <ng-template ngbPanelContent>
+                  
+
+                    <div class="container">
+                    
+                        <form [formGroup]="empleadoForm">
+                            <app-card cardTitle="Ficha Empleado" [options]="false">
+                              <div class="input-group mb-3">
+                                <label class="col-12">Nombre</label>
+                      
+                                <input type="text" disabled formControlName="nombreEmpleado" class="form-control"/>
+                      
+                              </div>
+
+                      
+                              <div class="input-group mb-3">
+                                <label class="col-12">Paises</label>
+                                
+                                <div class="input-group-append">
+                                  <label class="input-group-text" for="inputGroupSelect02">Opciones</label>
+                                </div>
+                                
+                                <select formControlName="pais" class="custom-select" id="inputGroupSelect02"
+                                (change)="cambiarDepto($event.target.value)">
+                                  <option *ngFor="let paises of listaPaises"  [value]="paises.COD_PAIS" >{{paises.NOMB_PAIS}}</option>
+                                </select>
+                                
+                              </div>
+
+                              <div class="input-group mb-3">
+                                <label class="col-12">Departamentos</label>
+                                
+                                <div class="input-group-append">
+                                  <label class="input-group-text" for="inputGroupSelect02">Opciones</label>
+                                </div>
+                                
+                                <select formControlName="depart" class="custom-select" id="inputGroupSelect02"
+                                (change)="cambiarMunic($event.target.value)">
+                                  <option *ngFor="let departamento of listaDepartementos"  [value]="departamento.COD_DEPTO" >{{departamento.NOM_DEPTO}}</option>
+                                </select>
+                                
+                              </div>
+
+                              <div class="input-group mb-3">
+                                <label class="col-12">Municipios</label>
+                                
+                                <div class="input-group-append">
+                                  <label class="input-group-text" for="inputGroupSelect02">Opciones</label>
+                                </div>
+                                
+                                <select formControlName="depart" class="custom-select" id="inputGroupSelect02">
+                                  <option *ngFor="let municipio of listaMunicipios"  [value]="municipio.COD_MUNI" >{{municipio.NOM_MUNI}}</option>
+                                </select>
+                                
+                              </div>
+                      
+                              
+                      
+                      
+                        
+                              <div class="card">
+                                
+                                <div class="card-footer">
+                                  <button class="btn btn-primary sm" (click)="guardar()">
+                                    Guardar
+                                  </button>
+                                </div>
+                              </div>
+                      
+                            </app-card>
+                          </form>
+
+
+
+                      </div>
+
+
+
+
+
+                </ng-template>
+            </ngb-panel>
+            <ngb-panel title="Two">
+                <ng-template ngbPanelContent>
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3
+                    wolf moon officia
+                    aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3
+                    wolf moon tempor,
+                    sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim
+                    keffiyeh helvetica,
+                    craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice
+                    lomo. Leggings
+                    occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of
+                    them accusamus
+                    labore sustainable VHS.
+                </ng-template>
+            </ngb-panel>
+        </ngb-accordion>
+
+
+    </div>
+
+</div>
