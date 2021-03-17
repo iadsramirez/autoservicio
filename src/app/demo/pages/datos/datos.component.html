@@ -59,6 +59,20 @@
                                 </select>
                                 
                               </div>
+
+
+                              <div class="input-group mb-3">
+                                <label class="col-12">Profesion Empleado</label>
+                                
+                                <div class="input-group-append">
+                                  <label class="input-group-text" for="inputGroupSelect02">Opciones</label>
+                                </div>
+                                
+                                <select formControlName="depart" class="custom-select" id="inputGroupSelect02">
+                                  <option *ngFor="let profesion of listaProfesion"  [value]="profesion.COD_PROFESION" >{{profesion.NOM_PROFESION}}</option>
+                                </select>
+                                
+                              </div>
                       
                               
                       
@@ -86,19 +100,36 @@
 
                 </ng-template>
             </ngb-panel>
-            <ngb-panel title="Two">
+            <ngb-panel title="Generales">
                 <ng-template ngbPanelContent>
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3
-                    wolf moon officia
-                    aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3
-                    wolf moon tempor,
-                    sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim
-                    keffiyeh helvetica,
-                    craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice
-                    lomo. Leggings
-                    occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of
-                    them accusamus
-                    labore sustainable VHS.
+                    <div class="container">
+                        <form [formGroup]="generalesForm">
+                            <app-card cardTitle="Datos Generales" [options]="false">
+                                
+
+                                
+                                <div class="input-group mb-3">
+                                    <label class="col-12">Telefono</label>
+                          
+                                    <input type="text"  formControlName="telefonos" class="form-control"/>
+                          
+                                  </div>
+                                  <div class="input-group mb-3">
+                                    <label class="col-12">Celular</label>
+                          
+                                    <input type="text"  formControlName="cel" class="form-control"/>
+                          
+                                  </div>
+                                  <div class="input-group mb-3">
+                                    <label class="col-12">Direccion</label>
+                          
+                                  
+                                    <textarea class="form-control" formControlName="dir" rows="3"></textarea>
+                          
+                                  </div>
+                            </app-card>
+                        </form>
+                    </div>
                 </ng-template>
             </ngb-panel>
         </ngb-accordion>

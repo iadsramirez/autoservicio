@@ -13,11 +13,13 @@ export class DatosComponent implements OnInit {
 
   listaAutoGestion:Array<any>=[];
   empleadoForm:FormGroup;
+  generalesForm:FormGroup;
   listaPaises:Array<any>;
   empleado: any;
   listaDepartementos:Array<any>;
   listaMunicipios:Array<any>;
   paisSelect:any;
+  listaProfesion:Array<any>
 
 
   constructor(
@@ -39,6 +41,21 @@ export class DatosComponent implements OnInit {
       );
 
 
+      this.generalesForm=this.formBuilder.group({
+        
+        cia:[],
+        emp:[],
+        estadoC:[],
+        correo:[],
+        profesion:[],
+        pais:[],    
+        depart:[],
+        muni:[],
+        zona:[],
+        telefonos:[],
+        cel:[],
+        dir:[],    
+      });
 
       this.empleadoForm=this.formBuilder.group({
         
@@ -86,6 +103,13 @@ export class DatosComponent implements OnInit {
 
 
     this.llenarEmpleado();
+
+    this.autoGestion.obtenerProfesiones(this.empleado[0].COD_CIA).subscribe(
+      profesion=>{
+        console.log(JSON.stringify(profesion));
+        this.listaProfesion=profesion;
+      }
+    );
 
   }
 

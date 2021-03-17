@@ -15,6 +15,14 @@ export class AutogestionService {
   constructor(private http: HttpClient) { }
 
 
+  obtenerNivelAcademico(cia:any):Observable<any>{
+    return this.http.get(environment.baseURl+'nivelesacademicos/'+cia);
+  }
+
+  obtenerProfesiones(cia:any):Observable<any>{
+    return this.http.get(environment.baseURl+'profesiones/'+cia);
+  }
+
 
   obtenerMunicipio(codPais:any,codDepto):Observable<any>{
     return this.http.get(environment.baseURl+'municipios/'+codPais+'/'+codDepto);
