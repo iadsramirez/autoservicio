@@ -308,6 +308,14 @@ const MenuApp = [
       icon: 'feather icon-sidebar',
       breadcrumbs: false
     },
+    {
+     id: 'dashboard',
+     title: 'Prestamo',
+     type: 'item',
+     url: '/prestamo',
+     icon: 'feather icon-sidebar',
+     breadcrumbs: false
+   }
       
     ]
   }

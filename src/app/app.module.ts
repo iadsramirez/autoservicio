@@ -31,6 +31,7 @@ import { NgbButtonsModule, NgbDropdownModule, NgbTabsetModule, NgbTooltipModule 
 import { AutenticarComponent } from './demo/pages/autenticar/autenticar.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,7 +51,7 @@ import { AutenticarComponent } from './demo/pages/autenticar/autenticar.componen
     ChatMsgComponent,
     ConfigurationComponent,
     ToggleFullScreenDirective,
-    AutenticarComponent,
+    AutenticarComponent
    // CitasComponent,
   ],
   imports: [

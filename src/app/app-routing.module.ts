@@ -69,6 +69,10 @@ const routes: Routes = [
       {
         path: 'datos',
         loadChildren: () => import('./demo/pages/datos/datos.module').then(module => module.DatosModule)
+      },
+      {
+        path: 'prestamo',
+        loadChildren: () => import('./demo/pages/prestamo/prestamo.module').then(module => module.PrestamoModule)
       }
     ]
   },
