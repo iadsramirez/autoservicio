@@ -72,118 +72,51 @@
                                   <option *ngFor="let profesion of listaProfesion"  [value]="profesion.COD_PROFESION" >{{profesion.NOM_PROFESION}}</option>
                                 </select>
                                 
-                              </div>
-                      
+                              </div> 
                               
-                      
-                      
-                        
-                              <div class="card">
                                 
-                                <div class="card-footer">
-                                  <button class="btn btn-primary sm" (click)="guardar()">
-                                    Guardar
-                                  </button>
+                              <div class="input-group mb-3">
+                                <label class="col-12">Telefono</label>
+                                <div class="input-group-append">
+                                  <label class="input-group-text" for="inputGroupSelect02"><i class="fa fa-phone" aria-hidden="true"></i></label>
                                 </div>
-                              </div>
                       
+                                <input type="text"  formControlName="telefonos" class="form-control"/>
+                      
+                              </div>
+
+                              <div class="input-group mb-3">
+                                <label class="col-12">Celular</label>
+                                <div class="input-group-append">
+                                  <label class="input-group-text" for="inputGroupSelect02"><i class="fa fa-mobile" aria-hidden="true"></i></label>
+                                </div>
+                                <input type="text"  formControlName="cel" class="form-control"/>
+                      
+                              </div>
+                              <div class="input-group mb-3">
+                                <label class="col-12">Direccion</label>
+                      
+                                <div class="input-group-append">
+                                  <label class="input-group-text" for="inputGroupSelect02"><i class="fa fa-map-marker" aria-hidden="true"></i></label>
+                                </div>
+                                <textarea class="form-control" formControlName="dir" rows="3"></textarea>
+                      
+                              </div>                     
                             </app-card>
                           </form>
 
-
-
+                          
+                        <div class="card">
+                                
+                            <div class="card-footer">
+                              <button class="btn btn-primary sm" (click)="guardar()">
+                                Guardar
+                              </button>
+                            </div>
+                          </div>
                       </div>
-
-
-
-
-
                 </ng-template>
             </ngb-panel>
-            <ngb-panel title="Generales">
-                <ng-template ngbPanelContent>
-                    <div class="container">
-                        <form [formGroup]="generalesForm">
-                            <app-card cardTitle="Datos Generales" [options]="false">
-
-
-                              <div class="input-group mb-3">
-                                <label class="col-12">Paises</label>
-                                
-                                <div class="input-group-append">
-                                  <label class="input-group-text" for="inputGroupSelect02">Opciones<i class="fa fa-caret-down" aria-hidden="true"></i></label>
-                                </div>
-                                
-                                <select formControlName="pais" class="custom-select" 
-                                (change)="cambiarDeptoGral($event.target.value)">
-                                  <option *ngFor="let paisesGral of listaPaises"  [value]="paisesGral.COD_PAIS" >{{paisesGral.NOMB_PAIS}}</option>
-                                </select>
-                                
-                              </div>
-
-                              <div class="input-group mb-3">
-                                <label class="col-12">Departamentos</label>
-                                
-                                <div class="input-group-append">
-                                  <label class="input-group-text" for="inputGroupSelect02">Opciones</label>
-                                </div>
-                                
-                                <select formControlName="depart" class="custom-select"
-                                (change)="cambiarMunicGral($event.target.value)">
-                                  <option *ngFor="let departamento of listaDepartementosGrl"  [value]="departamento.COD_DEPTO" >{{departamento.NOM_DEPTO}}</option>
-                                </select>
-                                
-                              </div>
-
-                              <div class="input-group mb-3">
-                                <label class="col-12">Municipios</label>
-                                
-                                <div class="input-group-append">
-                                  <label class="input-group-text" for="inputGroupSelect02">Opciones</label>
-                                </div>
-                                
-                                <select formControlName="depart" class="custom-select">
-                                  <option *ngFor="let municipio of listaMunicipiosGrl"  [value]="municipio.COD_MUNI" >{{municipio.NOM_MUNI}}</option>
-                                </select>
-                                
-                              </div>
-                                
-
-                                
-                                <div class="input-group mb-3">
-                                    <label class="col-12">Telefono</label>
-                                    <div class="input-group-append">
-                                      <label class="input-group-text" for="inputGroupSelect02"><i class="fa fa-phone" aria-hidden="true"></i></label>
-                                    </div>
-                          
-                                    <input type="text"  formControlName="telefonos" class="form-control"/>
-                          
-                                  </div>
-
-                                  <div class="input-group mb-3">
-                                    <label class="col-12">Celular</label>
-                                    <div class="input-group-append">
-                                      <label class="input-group-text" for="inputGroupSelect02"><i class="fa fa-mobile" aria-hidden="true"></i></label>
-                                    </div>
-                                    <input type="text"  formControlName="cel" class="form-control"/>
-                          
-                                  </div>
-                                  <div class="input-group mb-3">
-                                    <label class="col-12">Direccion</label>
-                          
-                                    <div class="input-group-append">
-                                      <label class="input-group-text" for="inputGroupSelect02"><i class="fa fa-map-marker" aria-hidden="true"></i></label>
-                                    </div>
-                                    <textarea class="form-control" formControlName="dir" rows="3"></textarea>
-                          
-                                  </div>
-                            </app-card>
-                        </form>
-                    </div>
-                </ng-template>
-            </ngb-panel>
-
-
             <ngb-panel title="Preparacion Academica">
               <ng-template ngbPanelContent>
                   <div class="container">
@@ -300,12 +233,50 @@
 
                           </app-card>
                       </form>
+
+                      <div class="card">
+                        <div class="card-body">
+                            <button class="btn btn-primary" (click)="agregarNivelAcademico()">
+                                Agregar
+                            </button>
+                        </div>
+                      </div>
+
+                      <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive-lg">
+                                <table class="table">
+                                    <thead>
+                                      <tr>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col">Pais</th>
+                                        <th scope="col">Departamento</th>
+                                        <th scope="col">Nivel academico</th>
+                                        <th scope="col">Profesion</th>
+                                        <th scope="col">Año Ingreso</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr *ngFor="let item of listaNivelAcademicoTBl" >
+                                        <th scope="row">{{item.institucion}}</th>
+                                        <td>{{item.pais}}</td>
+                                        <td>{{item.depart}}</td>
+                                        <td>{{item.nivel}}</td>
+                                        <td>{{item.subNivel}}</td>
+                                        <td>{{item.anioIng}}</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+
+                            </div>
+                        
+                        </div>
+                      </div>
+
+
                   </div>
               </ng-template>
           </ngb-panel>
-
-
-
         <ngb-panel title="Emergencias">
             <ng-template ngbPanelContent>
                 <div class="container">
@@ -352,7 +323,7 @@
 
                           <div class="card" >
                             <div class="card-body">
-                            <button class="btn btn-primary">
+                            <button class="btn btn-primary"  (click)="agregarEmergencia()">
                               Agregar &nbsp;<i class="fa fa-plus" aria-hidden="true"></i>
                             </button>
                             </div>
@@ -370,9 +341,9 @@
                                 </thead>
                                 <tbody>
                                   <tr *ngFor="let item of emergencias" >
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
+                                    <td>{{item.nombreCon}}</td>
+                                    <td>{{item.telCon}}</td>
+                                    <td>{{item.trabajoCon}}</td>
                                   </tr>
                                 
                                 </tbody>
@@ -387,7 +358,6 @@
                 </div>
             </ng-template>
         </ngb-panel>
-
         <ngb-panel title="Capacitaciones">
           <ng-template ngbPanelContent>
               <div class="container">
