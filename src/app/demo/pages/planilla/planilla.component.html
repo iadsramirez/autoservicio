@@ -1,11 +1,11 @@
 <div class="row">
   <app-card cardTitle="" class="col-md-12 col-xl-12" [options]="false" *ngFor="let item of objetoTotales">
-    <button type="button" class="btn btn-primary">DEVENGADO:<span
-        class="badge badge-light">${{item.DEVENGADO}}</span></button>
-    <button type="button" class="btn btn-primary ml-2">DEDUCCIONES:<span
-        class="badge badge-light">${{item.DEDUCCIONES}}</span></button>
-    <button type="button" class="btn btn-info ml-2">LIQUIDO:<span
-        class="badge badge-light">${{item.LIQUIDO}}</span></button>
+    <button type="button" class="btn btn-primary col-md-4 col-xl-4">DEVENGADO:<span
+        class="badge badge-light">{{item.DEVENGADO | currency }}</span></button>
+    <button type="button" class="btn btn-primary ml-2 col-md-4 col-xl-4">DEDUCCIONES:<span
+        class="badge badge-light">{{item.DEDUCCIONES | currency }}</span></button>
+    <button type="button" class="btn btn-info ml-2 col-md-3 col-xl-3">LIQUIDO:<span
+        class="badge badge-light">{{item.LIQUIDO | currency }}</span></button>
   </app-card>
 </div>
 

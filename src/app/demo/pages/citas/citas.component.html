@@ -113,6 +113,16 @@
 
         </div>
 
+        <div class="input-group mb-3" *ngIf="mostrarHora">
+          <label class="col-12">Minutos: <strong>{{minutos}}</strong></label>
+          <button type="button" class="btn btn-info" (click)="agregarMinutos(0)">0</button>
+          <button type="button" class="btn btn-info" (click)="agregarMinutos(15)">15</button>
+          <button type="button" class="btn btn-info" (click)="agregarMinutos(30)">30</button>
+          <button type="button" class="btn btn-info" (click)="agregarMinutos(45)">45</button>
+          
+
+        </div>
+
         <div class="input-group mb-3">
           <label class="col-12">Observacion</label>
           <div class="input-group-prepend">

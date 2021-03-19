@@ -302,7 +302,7 @@ const MenuApp = [
      },
      {
       id: 'dashboard',
-      title: 'Datos',
+      title: 'Expediente',
       type: 'item',
       url: '/datos',
       icon: 'feather icon-sidebar',

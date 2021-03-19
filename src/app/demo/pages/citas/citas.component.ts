@@ -12,6 +12,7 @@ import 'sweetalert2/src/sweetalert2.scss';
 })
 export class CitasComponent implements OnInit {
 
+  minutos:any;
   empleado: any;
   listadoClinina:Array<any>;
   registerAccionForm: FormGroup;
@@ -36,9 +37,10 @@ export class CitasComponent implements OnInit {
     this.autoGestion.obtenerTipoAccionClinica(this.empleado[0].COD_CIA, this.empleado[0].COD_EMP,
       this.empleado[0].USUARIO).subscribe(
         data=>{
-          console.log(data);
+         
           this.listadoClinina=data;
-         // this.listadoClinina=this.listadoClinina.filter(item=>{item.COD_TIPOACCION==40});
+          console.log(JSON.stringify(this.listadoClinina));
+         this.listadoClinina=this.listadoClinina.filter(item=>item.COD_TIPOACCION==40);
         }
       );
 
@@ -62,7 +64,9 @@ export class CitasComponent implements OnInit {
 
   }
 
-
+agregarMinutos(valor:any){
+this.minutos=valor;
+}
 
   agregarHora(valor:any){
     this.horas=valor;
@@ -96,7 +100,8 @@ export class CitasComponent implements OnInit {
         this.obtenerLista();
         //this.toastr.success('Datos Guardado', '');
       }
-    )
+    );
+    this.registerAccionForm.reset();
 
   }
 
@@ -115,7 +120,7 @@ export class CitasComponent implements OnInit {
 
 
   limpiar(){
-    this.registerAccionForm.reset();
+
     this.horas='';
   }
 
