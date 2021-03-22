@@ -23,7 +23,7 @@
             <th scope="col">Observacion</th>
             <th scope="col">Fecha</th>
             <th scope="col">Estado</th>
-            <th scope="col">Detalle</th>
+            
           </tr>
         </thead>
         <tbody>
@@ -35,11 +35,6 @@
             <td>
               <span *ngIf="accion.STATUS =='A'">Activo</span>
               <span *ngIf="accion.STATUS =='G'" >Generado</span>
-            </td>
-            <td>
-              <button class="btn btn-primary" data-toggle="modal">
-                <i class="fa fa-check" aria-hidden="true"></i>
-              </button>
             </td>
           </tr>
         </tbody>
@@ -152,7 +147,7 @@
         </div>
 
 
-        <div class="input-group mb-3" *ngIf="mostrarHora" >
+        <div class="input-group mb-3">
           <label class="col-12">Dias</label>
 
           <input type="number"  formControlName="dias"  class="form-control"/>

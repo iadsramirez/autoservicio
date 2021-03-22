@@ -73,6 +73,9 @@ const routes: Routes = [
       {
         path: 'prestamo',
         loadChildren: () => import('./demo/pages/prestamo/prestamo.module').then(module => module.PrestamoModule)
+      },{
+        path: 'capacitacion',
+        loadChildren: () => import('./demo/pages/accion/accion.module').then(module => module.AccionModule)
       }
     ]
   },

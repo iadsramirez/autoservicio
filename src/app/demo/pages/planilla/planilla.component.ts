@@ -7,6 +7,8 @@ import { AutogestionService } from '../../../servicio/autogestion.service';
   styleUrls: ['./planilla.component.scss']
 })
 export class PlanillaComponent implements OnInit {
+  
+  planilla:any={};
   empleado: any;
   objetoTotales: any;
   listadoProgramacionesCerradas: Array<any>;
@@ -55,13 +57,21 @@ export class PlanillaComponent implements OnInit {
 
 
   llenarDetalle(data: any) {
+
     //console.log(JSON.stringify(data));
+
+    this.planilla=data;
+
+    console.log('---------');
+    console.log(JSON.stringify(this.planilla));
+
+    console.log('---------');
     this.listaDetallePlanilla=[];
     this.autoGestionService.obtenerDetallePlanilla(data.COD_CIA, data.ANIO,
       data.MES, data.COD_TIPOPLA, data.NUM_PLANILLA, data.COD_EMP).subscribe(
         valor=>{
           this.listaDetallePlanilla=valor;
-          console.log('---------------');
+          console.log('--------------detall-');
           console.log(JSON.stringify(valor));
         }
       );

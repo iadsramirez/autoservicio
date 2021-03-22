@@ -54,7 +54,7 @@
                                   <label class="input-group-text" for="inputGroupSelect02">Opciones</label>
                                 </div>
                                 
-                                <select formControlName="depart" class="custom-select" id="inputGroupSelect02">
+                                <select formControlName="muni" class="custom-select" id="inputGroupSelect02">
                                   <option *ngFor="let municipio of listaMunicipios"  [value]="municipio.COD_MUNI" >{{municipio.NOM_MUNI}}</option>
                                 </select>
                                 
@@ -93,6 +93,16 @@
                                 <input type="text"  formControlName="cel" class="form-control"/>
                       
                               </div>
+
+                              <div class="input-group mb-3">
+                                <label class="col-12">Correo</label>
+                                <div class="input-group-append">
+                                  <label class="input-group-text" for="inputGroupSelect02"><i class="fa fa-mobile" aria-hidden="true"></i></label>
+                                </div>
+                                <input type="email"  formControlName="correo" class="form-control"/>
+                      
+                              </div>
+
                               <div class="input-group mb-3">
                                 <label class="col-12">Direccion</label>
                       
@@ -362,7 +372,7 @@
           <ng-template ngbPanelContent>
               <div class="container">
                   <form [formGroup]="capacitacionForm">
-                      <app-card cardTitle="Emergencia" [options]="false">
+                      <app-card cardTitle="Capacitaciones" [options]="false">
 
                         <div class="input-group mb-3">
                           <label class="col-12">Institucion</label>
@@ -386,7 +396,7 @@
                         </div>
 
                         <div class="input-group mb-3">
-                          <label class="col-12">Fecha</label>
+                          <label class="col-12">Periodo</label>
                           <div class="input-group-append">
                             <label class="input-group-text" for="inputGroupSelect02"><i class="fa fa-male" aria-hidden="true"></i></label>
                           </div>

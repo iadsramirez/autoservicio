@@ -315,7 +315,14 @@ const MenuApp = [
      url: '/prestamo',
      icon: 'feather icon-sidebar',
      breadcrumbs: false
-   }
+   },{
+    id: 'dashboard',
+    title: 'Capacitaciones',
+    type: 'item',
+    url: '/capacitacion',
+    icon: 'feather icon-sidebar',
+    breadcrumbs: false
+  }
       
     ]
   }

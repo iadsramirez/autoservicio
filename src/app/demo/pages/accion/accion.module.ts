@@ -5,20 +5,16 @@ import {SharedModule} from '../../../theme/shared/shared.module';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-//import { ToastrModule } from 'ngx-toastr';
-//import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DatosComponent } from './datos.component';
-import { DatosRoutingModule } from './datos-routing.module';
 import {AccordionModule} from "ng2-accordion";
-import { NgxMaskModule } from 'ngx-mask';
+import { AccionComponent } from './accion.component';
+import { AccionRoutingModule } from './accion-routing.module';
 
 @NgModule({
-  declarations: [DatosComponent],
+  declarations: [AccionComponent],
   imports: [NgxPaginationModule,FormsModule,NgbModule.forRoot(),
-    CommonModule,DatosRoutingModule,AccordionModule
+    CommonModule,AccionRoutingModule,AccordionModule
     ,
-    SharedModule,
-    NgxMaskModule.forRoot()
+    SharedModule
   ]
 })
-export class DatosModule { }
+export class AccionModule { }

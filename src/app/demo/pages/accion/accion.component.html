@@ -1,0 +1,28 @@
+<app-card cardTitle="Capacitaciones" [options]="false">
+    <div class="row">
+        <div class="table-responsive">
+            <table class="table table-bordered table-sm table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Tipo</th>
+                        <th scope="col">Descripcion</th>
+                        <th scope="col">Periodo</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Insitucion</th>
+                        <th scope="col">Nota</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let capacitacion of listadoAccionesRecibidas">
+                        <td data-label="Account">{{capacitacion.TIPO}}</td>
+                        <td data-label="Account">{{capacitacion.DESCRIPCION}}</td>
+                        <td data-label="Account">{{capacitacion.PERIODO}}</td>
+                        <td data-label="Account">{{capacitacion.FECHACAPA}}</td>
+                        <td data-label="Account">{{capacitacion.NOM_INSTITUCION}}</td>
+                        <td data-label="Account">{{capacitacion.NOTA}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div> 
+  </app-card>

@@ -175,14 +175,23 @@ mostrarHora:boolean=false;
   guardar(){
     const fechas=this.registerAccionForm.get('fechaSol').value;
     const fechasFinal=this.registerAccionForm.get('fechaFinal').value;
+    let tipoAccion:any=this.registerAccionForm.get('accion').value;
 
     let fecha=new Date(Number(fechas.year),Number(fechas.month),Number(fechas.day));
+
+    if(this.registerAccionForm.get('accion').value){
+    let  tipo:number=Number(this.registerAccionForm.get('accion').value);
+    if(tipo==0){
+      tipoAccion=this.registerAccionForm.get('tipoAccion').value;
+    }
+
+    }
 
     const objeto={
 
       cia:this.empleado[0].COD_CIA,
       emp:this.empleado[0].COD_EMP,
-      tipoAcc:this.registerAccionForm.get('accion').value,
+      tipoAcc:tipoAccion,
       fecha:String(fechas.day)+'/'+String(fechas.month)+'/'+String(fechas.year),
       observacion:this.registerAccionForm.get('observacion').value,
       usrC:this.empleado[0].USUARIO,
@@ -201,7 +210,9 @@ mostrarHora:boolean=false;
         this.obtenerLista();
         //this.toastr.success('Datos Guardado', '');
       }
-    )
+    );
+
+    this.registerAccionForm.reset();
 
   }
 

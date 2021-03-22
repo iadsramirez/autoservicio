@@ -14,6 +14,18 @@ export class AutogestionService {
 
   constructor(private http: HttpClient) { }
 
+
+
+  obtenerDetallePrestamo(cia:any,emp:any,corr:any,deduc:any):Observable<any>{
+    return this.http.get(environment.baseURl+'detprestamos/'+cia+'/'+emp+'/'+corr+'/'+deduc);
+  }
+
+
+  obtenerCapacitaciones(cia:any,codEmp:any):Observable<any>{
+    return this.http.get(environment.baseURl+'capacitaciones/'+cia+'/'+codEmp);
+  }
+
+
   guardarDatosGenerales(data:any):Observable<any>{
     return this.http.post(environment.baseURl+'empleadosTemp/',data);
       }

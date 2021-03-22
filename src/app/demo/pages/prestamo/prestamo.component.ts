@@ -10,6 +10,7 @@ export class PrestamoComponent implements OnInit {
 
   listadoPrestamo:Array<any>=[];
   empleado:any;
+  listaDetallePrestamo:Array<any>;
 
   constructor(private autoServicio:AutogestionService) {
     this.autoServicio.logeado=true;
@@ -24,6 +25,18 @@ export class PrestamoComponent implements OnInit {
    }
 
   ngOnInit(): void {
+  }
+
+
+  llenarDetalle(data:any){
+   // console.log(JSON.stringify(data));
+    this.autoServicio.obtenerDetallePrestamo(this.empleado[0].COD_CIA,this.empleado[0].COD_EMP,data.CORRELATIVO,data.COD_DEDUC).subscribe(
+
+      detalle=>{
+        console.log(JSON.stringify(detalle));
+        this.listaDetallePrestamo=detalle;
+      }
+    );
   }
 
 }

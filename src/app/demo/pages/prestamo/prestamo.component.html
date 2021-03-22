@@ -1,32 +1,82 @@
-<div class="card" >
-    <div class="card-body">
-      <h5 class="card-title">Estado de Cuenta</h5>
-    <div class="card-text">
+  <app-card cardTitle="Estado de Cuenta" [options]="false">
+    <div class="row">
         <div class="table-responsive">
-        <table class="table table-hover">
+        
+          <table class="table table-bordered table-sm table-hover">
             <thead>
               <tr>
                 <th scope="col">Correlativo</th>
                 <th scope="col">Tipo</th>
                 <th scope="col">Descripcion</th>
-                <th scope="col">Saldo Actual</th>
-                <th scope="col">Valor</th>
+                <th scope="col" style="text-align: right;">Saldo Actual</th>
+                <th scope="col" style="text-align: right;" >Valor</th>
                 <th scope="col">Fecha</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of listadoPrestamo" >
-                <th scope="row">{{item.CORRELATIVO}}</th>
-                <th scope="row">{{item.DES_DP}}</th>
-                <th scope="row">{{item.DESCRIPCION}}</th>
-                <th scope="row">{{item.SALDO_ACTUAL}}</th>
-                <th scope="row">{{item.VALOR_PRESTA}}</th>
-                <th scope="row">{{item.FEC_INICIO}}</th>
+              <tr *ngFor="let item of listadoPrestamo" (click)="llenarDetalle(item)" 
+              data-toggle="modal" (click)="myLargeModalLabel.show()"
+              >
+                <td scope="row">{{item.CORRELATIVO}}</td>
+                <td scope="row">{{item.DES_DP}}</td>
+                <td scope="row">{{item.DESCRIPCION}}</td>
+                <td scope="row">{{item.SALDO_ACTUAL | currency}}</td>
+                <td scope="row">{{item.VALOR_PRESTA | currency}}</td>
+                <td scope="row">{{item.FEC_INICIO}}</td>
               </tr>
             </tbody>
-          </table>
+        </table>
+
+
+
         </div>
-    </div>
-      
-    </div>
+    </div> 
+  </app-card>
+
+
+
+
+
+
+
+
+  
+
+<app-ui-modal #myLargeModalLabel [hideFooter]="true" [dialogClass]="'modal-lg'">
+  <div class="app-modal-header">
+    <h5 class="modal-title">Detalle Estado de Cuenta</h5>
+    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="myLargeModalLabel.hide()"><span aria-hidden="true">&times;</span></button>
   </div>
+  <div class="app-modal-body" style="overflow-x: auto">
+    <table class="table table-hover table-primary">
+      <thead style="color: white;background-color:black;">
+        <tr  >
+          <th scope="col">#</th>
+          <th scope="col">Empleado</th>
+          <th scope="col">Tipo Planilla</th>
+          <th scope="col">Año</th>
+          <th scope="col">Mes</th>
+          <th scope="col">No Planilla</th>
+          <th scope="col">Fecha</th>
+          <th scope="col" style="text-align: right;" >Cargo</th>
+          <th scope="col">No Movimiento</th>
+          <th scope="col" style="text-align: right;" >Abono</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let detalle of listaDetallePrestamo ; index as i">
+          <td scope="row">{{i+1}}</td>
+          <td>{{detalle.NOMBRE}}</td>
+          <td>{{detalle.NOM_TIPOPLA}}</td>
+          <td>{{detalle.ANIO}}</td>
+          <td>{{detalle.MES}}</td>
+          <td>{{detalle.NUM_PLANILLA}}</td>
+          <td>{{detalle.FECHA}}</td>
+          <td style="text-align: right;"  >{{detalle.CARGO | currency }}</td>
+          <td>{{detalle.NO_MOV}}</td>
+          <td style="text-align: right;"  >{{detalle.ABONO | currency }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</app-ui-modal>

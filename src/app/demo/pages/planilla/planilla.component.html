@@ -27,7 +27,8 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let planilla of listadoProgramacionesCerradas  | paginate: { itemsPerPage: 10, currentPage: p }  ; index as i">
+          <tr
+            *ngFor="let planilla of listadoProgramacionesCerradas  | paginate: { itemsPerPage: 10, currentPage: p }  ; index as i">
             <td>{{i+1}}</td>
             <td>{{planilla.NOM_TIPOPLA}}</td>
             <td>{{planilla.NUM_PLANILLA}}</td>
@@ -35,8 +36,8 @@
             <td>{{planilla.MES}}</td>
             <td>{{planilla.COD_EMP}}</td>
             <td>
-              <button class="btn btn-primary" (click)="llenarDetalle(planilla)"
-                data-toggle="modal" (click)="myLargeModalLabel.show()">
+              <button class="btn btn-primary" (click)="llenarDetalle(planilla)" data-toggle="modal"
+                (click)="myLargeModalLabel.show()">
                 <i class="fa fa-check" aria-hidden="true"></i>
               </button>
             </td>
@@ -71,12 +72,28 @@
 <app-ui-modal #myLargeModalLabel [hideFooter]="true" [dialogClass]="'modal-lg'">
   <div class="app-modal-header">
     <h5 class="modal-title">Detalle de Planilla</h5>
-    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="myLargeModalLabel.hide()"><span aria-hidden="true">&times;</span></button>
+    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close"
+      (click)="myLargeModalLabel.hide()"><span aria-hidden="true">&times;</span></button>
+
+    <div class="container">
+
+      <div class="row my-2">
+        <div class="form-group">
+          <h6>Tipo Planilla: <span style="color: blue;">{{planilla.NOM_TIPOPLA}}</span> </h6> 
+          <h6>Nº Planilla: <span style="color: blue;">{{planilla.NUM_PLANILLA}}</span> </h6>
+          <h6>Año: <span style="color: blue;">{{planilla.ANIO}}</span> </h6>
+          <h6>Mes: <span style="color: blue;">{{planilla.MES}}</span> </h6>
+        </div>
+      </div>
+
+    </div>  
+    
+
   </div>
   <div class="app-modal-body">
     <table class="table table-hover table-primary">
       <thead style="color: white;background-color:black;">
-        <tr  >
+        <tr>
           <th scope="col">#</th>
           <th scope="col">Empleado</th>
           <th scope="col">Concepto</th>
@@ -88,7 +105,7 @@
           <th scope="row">{{i+1}}</th>
           <td>{{detalle.NOMBRE}}</td>
           <td>{{detalle.CONCEPTO}}</td>
-          <td>{{detalle.MONTO_CONCEPTO}}</td>
+          <td style="text-align: right;">{{detalle.MONTO_CONCEPTO  | currency }}</td>
         </tr>
       </tbody>
     </table>
