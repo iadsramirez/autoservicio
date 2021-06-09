@@ -112,6 +112,9 @@ export class AutogestionService {
 
 
   obtenerProgramacionesCerradas(cia:number,emp:number):Observable<any>{
+    console.log('Obtencion parametros service'+cia);
+    console.log('Obtencion parametros service'+emp);
+
     return this.http.get(environment.baseURl+'programacionPlanilla/'+cia+'/'+emp);
 
   }

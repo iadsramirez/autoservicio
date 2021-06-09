@@ -7,7 +7,7 @@ import { AutogestionService } from '../../../servicio/autogestion.service';
   styleUrls: ['./planilla.component.scss']
 })
 export class PlanillaComponent implements OnInit {
-  
+
   planilla:any={};
   empleado: any;
   objetoTotales: any;
@@ -37,6 +37,8 @@ export class PlanillaComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.empleado = JSON.parse(localStorage.getItem('empleadoSession'));
+    this.llenarTablaProgramacionesCerradas(this.empleado[0].COD_CIA, this.empleado[0].COD_EMP);
   }
 
 
@@ -47,9 +49,9 @@ export class PlanillaComponent implements OnInit {
 
   llenarTablaProgramacionesCerradas(cia: any, emp: any) {
     this.autoGestionService.obtenerProgramacionesCerradas(cia, emp).subscribe(
-      listaPlanilla => {
-        this.listadoProgramacionesCerradas = listaPlanilla;
-        console.log(JSON.stringify(listaPlanilla));
+      pla => {
+        this.listadoProgramacionesCerradas = pla;
+        console.log('LISTADO PLANILLAS'+JSON.stringify(pla));
       }
     );
   }
