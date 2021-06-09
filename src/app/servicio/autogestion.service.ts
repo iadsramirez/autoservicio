@@ -100,6 +100,7 @@ export class AutogestionService {
 
 
   obtenerEmpleado(usuario:string):Observable<any>{
+    console.log('el usuario'+usuario);
     return this.http.get(environment.baseURl+'usuarios/'+usuario);
   }
 

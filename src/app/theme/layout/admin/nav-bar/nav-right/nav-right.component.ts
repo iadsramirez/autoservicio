@@ -44,6 +44,7 @@ export class NavRightComponent implements OnInit, DoCheck {
     this.chatMessage = false;
     this.gradientConfig = GradientConfig.config;
     this.tempuser=JSON.parse(localStorage.getItem('empleadoSession'));
+    console.log('objeto json'+JSON.stringify(JSON.parse(localStorage.getItem('empleadoSession'))));
     this.usuario=this.tempuser[0];
     console.log('Valores de usuario logeado'+JSON.stringify(this.usuario));
 

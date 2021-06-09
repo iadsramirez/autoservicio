@@ -12,7 +12,7 @@ export class AutenticarComponent implements OnInit {
 
   ingresoForm:FormGroup;
 
-  constructor(private fb: FormBuilder,public autoGestionService:AutogestionService,private router:Router) { 
+  constructor(private fb: FormBuilder,public autoGestionService:AutogestionService,private router:Router) {
 
     this.ingresoForm = this.fb.group({
       usuario: ['', [Validators.required]],
@@ -38,16 +38,22 @@ export class AutenticarComponent implements OnInit {
       data=>{
         console.log('lo que tiene :'+JSON.stringify(data));
         this.autoGestionService.logeado=true;
-        this.autoGestionService.obtenerEmpleado(usuario).subscribe(
-          empleado=>{
-            localStorage.setItem('empleadoSession', JSON.stringify(empleado))
-          }
-        );
-       
-        this.router.navigate(['/menu-principal']);
-        
       }
     );
+
+
+    this.autoGestionService.obtenerEmpleado(usuario).subscribe(
+      empleado=>{
+        console.log('el empleado'+JSON.stringify(empleado));
+        localStorage.setItem('empleadoSession', JSON.stringify(empleado))
+      }
+    );
+
+
+
+    this.router.navigate(['/menu-principal']);
+
+
   }
 
 

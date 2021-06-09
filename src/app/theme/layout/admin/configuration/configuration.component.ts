@@ -1,6 +1,6 @@
-import {Component, NgZone, OnInit, ViewEncapsulation} from '@angular/core';
-import {GradientConfig} from '../../../../app-config';
-import {Location} from '@angular/common';
+import { Component, NgZone, OnInit, ViewEncapsulation } from '@angular/core';
+import { GradientConfig } from '../../../../app-config';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-configuration',
@@ -47,8 +47,8 @@ export class ConfigurationComponent implements OnInit {
 
   ngOnInit() {
     this.styleSelectorToggle = false;
-
-    this.layoutType =  this.gradientConfig.layoutType;
+    this.gradientConfig.layoutType = 'menu-light';
+    this.layoutType = this.gradientConfig.layoutType;
     this.setLayout(this.layoutType);
 
     this.headerBackgroundColor = this.gradientConfig.headerBackColor;
@@ -155,29 +155,30 @@ export class ConfigurationComponent implements OnInit {
   // change main layout
   setLayout(layout) {
     this.isConfig = true;
-    if(document.querySelector('.pcoded-navbar').classList){
+    //document.querySelector('.pcoded-navbar').classList
+    if (document.querySelector('.pcoded-navbar')) {
 
-    document.querySelector('.pcoded-navbar').classList.remove('menu-light');
-    document.querySelector('.pcoded-navbar').classList.remove('menu-dark');
-    document.querySelector('.pcoded-navbar').classList.remove('navbar-dark');
-    document.querySelector('.pcoded-navbar').classList.remove('brand-dark');
-    document.querySelector('body').classList.remove('gradient-dark');
+      document.querySelector('.pcoded-navbar').classList.remove('menu-light');
+      document.querySelector('.pcoded-navbar').classList.remove('menu-dark');
+      document.querySelector('.pcoded-navbar').classList.remove('navbar-dark');
+      document.querySelector('.pcoded-navbar').classList.remove('brand-dark');
+      document.querySelector('body').classList.remove('gradient-dark');
 
-    this.layoutType = layout;
-    if (layout === 'menu-light') {
-      document.querySelector('.pcoded-navbar').classList.add(layout);
+      this.layoutType = layout;
+      if (layout === 'menu-light') {
+        document.querySelector('.pcoded-navbar').classList.add(layout);
+      }
+      if (layout === 'dark') {
+        document.querySelector('.pcoded-navbar').classList.add('navbar-dark');
+        document.querySelector('.pcoded-navbar').classList.add('brand-dark');
+        this.setHeaderBackground('header-dark');
+
+        document.querySelector('body').classList.add('gradient-dark');
+      }
+
+
     }
-    if (layout === 'dark') {
-      document.querySelector('.pcoded-navbar').classList.add('navbar-dark');
-      document.querySelector('.pcoded-navbar').classList.add('brand-dark');
-      this.setHeaderBackground('header-dark');
 
-      document.querySelector('body').classList.add('gradient-dark');
-    }
-
-
-    }
-    
 
 
 
@@ -216,8 +217,13 @@ export class ConfigurationComponent implements OnInit {
   changeMenuFixedLayout(flag) {
     setTimeout(() => {
       if (flag) {
-        document.querySelector('.pcoded-navbar').classList.remove('menupos-static');
-        document.querySelector('.pcoded-navbar').classList.add('menupos-fixed');
+        if(document.querySelector('.pcoded-navbar')){
+
+          document.querySelector('.pcoded-navbar').classList.remove('menupos-static');
+          document.querySelector('.pcoded-navbar').classList.add('menupos-fixed');
+
+        }
+
         if (this.gradientConfig.layout === 'vertical') {
           (document.querySelector('#nav-ps-gradient-able') as HTMLElement)
             .style.maxHeight = 'calc(100vh - 56px)'; // calc(100vh - 70px) amit
@@ -245,9 +251,15 @@ export class ConfigurationComponent implements OnInit {
 
   changeHeaderFixedLayout(flag) {
     if (flag) {
-      document.querySelector('.pcoded-header').classList.add('headerpos-fixed');
+      if(document.querySelector('.pcoded-header')){
+        document.querySelector('.pcoded-header').classList.add('headerpos-fixed');
+      }
+
     } else {
-      document.querySelector('.pcoded-header').classList.remove('headerpos-fixed');
+      if(document.querySelector('.pcoded-header')){
+        document.querySelector('.pcoded-header').classList.remove('headerpos-fixed');
+      }
+
       // static
       if (this.gradientConfig.layout === 'vertical' && this.menuFixedLayout) {
         window.addEventListener('scroll', this.scroll, true);
@@ -276,21 +288,27 @@ export class ConfigurationComponent implements OnInit {
   setHeaderBackground(background) {
     this.headerBackgroundColor = background;
     this.gradientConfig.headerBackColor = background;
-    document.querySelector('.pcoded-header').classList.remove('header-blue');
-    document.querySelector('.pcoded-header').classList.remove('header-red');
-    document.querySelector('.pcoded-header').classList.remove('header-purple');
-    document.querySelector('.pcoded-header').classList.remove('header-info');
-    document.querySelector('.pcoded-header').classList.remove('header-dark');
-    document.querySelector('.pcoded-header').classList.remove('header-orenge');
-    document.querySelector('.pcoded-header').classList.remove('header-green');
-    document.querySelector('.pcoded-header').classList.remove('header-yellow');
-    document.querySelector('.pcoded-header').classList.remove('header-orchidgreen');
-    document.querySelector('.pcoded-header').classList.remove('header-indigogreen');
-    document.querySelector('.pcoded-header').classList.remove('header-darkgreen');
-    document.querySelector('.pcoded-header').classList.remove('header-darkblue');
+    if (document.querySelector('.pcoded-header')) {
+      document.querySelector('.pcoded-header').classList.remove('header-blue');
+      document.querySelector('.pcoded-header').classList.remove('header-red');
+      document.querySelector('.pcoded-header').classList.remove('header-purple');
+      document.querySelector('.pcoded-header').classList.remove('header-info');
+      document.querySelector('.pcoded-header').classList.remove('header-dark');
+      document.querySelector('.pcoded-header').classList.remove('header-orenge');
+      document.querySelector('.pcoded-header').classList.remove('header-green');
+      document.querySelector('.pcoded-header').classList.remove('header-yellow');
+      document.querySelector('.pcoded-header').classList.remove('header-orchidgreen');
+      document.querySelector('.pcoded-header').classList.remove('header-indigogreen');
+      document.querySelector('.pcoded-header').classList.remove('header-darkgreen');
+      document.querySelector('.pcoded-header').classList.remove('header-darkblue');
+    }
+
 
     if (background !== 'header-default') {
-      document.querySelector('.pcoded-header').classList.add(background);
+      if(document.querySelector('.pcoded-header')){
+        document.querySelector('.pcoded-header').classList.add(background);
+      }
+
     }
   }
 

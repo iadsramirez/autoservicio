@@ -15,9 +15,9 @@ export class AdminComponent implements OnInit {
   public windowWidth: number;
 
   constructor(public autoGestionServicio:AutogestionService,private zone: NgZone, private location: Location) {
-   
-    
-   
+
+
+
     this.gradientConfig = GradientConfig.config;
     let currentURL = this.location.path();
     const baseHerf = this.location['_baseHref'];
@@ -42,8 +42,18 @@ export class AdminComponent implements OnInit {
     if (this.windowWidth < 992) {
       this.gradientConfig.layout = 'vertical';
       setTimeout(() => {
-        document.querySelector('.pcoded-navbar').classList.add('menupos-static');
-        (document.querySelector('#nav-ps-gradient-able') as HTMLElement).style.maxHeight = '100%'; // 100% amit
+
+        if(document.querySelector('.pcoded-navbar')){
+          document.querySelector('.pcoded-navbar').classList.add('menupos-static');
+        }
+
+
+        if(document.querySelector('#nav-ps-gradient-able') ){
+          (document.querySelector('#nav-ps-gradient-able') as HTMLElement).style.maxHeight = '100%'; // 100% amit
+        }
+
+
+
       }, 500);
     }
   }
