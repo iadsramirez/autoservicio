@@ -7,7 +7,7 @@ import { AutogestionService } from 'src/app/servicio/autogestion.service';
   styleUrls: ['./prestamo.component.scss']
 })
 export class PrestamoComponent implements OnInit {
-
+  p: number = 1;
   listadoPrestamo:Array<any>=[];
   empleado:any;
   listaDetallePrestamo:Array<any>;
@@ -15,7 +15,7 @@ export class PrestamoComponent implements OnInit {
   constructor(private autoServicio:AutogestionService) {
     this.autoServicio.logeado=true;
     this.empleado = JSON.parse(localStorage.getItem('empleadoSession'));
-    
+
     this.autoServicio.obtenerPrestamo(this.empleado[0].COD_CIA,this.empleado[0].COD_EMP).subscribe(
       prestamo=>{
         this.listadoPrestamo=prestamo;

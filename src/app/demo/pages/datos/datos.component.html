@@ -1,88 +1,102 @@
 <div class="card">
 
     <div class="card-body">
-     
+
         <ngb-accordion #acc="ngbAccordion" activeIds="config-panel-one" type="info" >
             <ngb-panel  title="Ficha Empleado" id="config-panel-one">
                 <ng-template ngbPanelContent>
-                  
+
 
                     <div class="container">
-                    
+
                         <form [formGroup]="empleadoForm">
                             <app-card cardTitle="Ficha Empleado" [options]="false">
                               <div class="input-group mb-3">
                                 <label class="col-12">Nombre</label>
-                      
+
                                 <input type="text" disabled formControlName="nombreEmpleado" class="form-control"/>
-                      
+
                               </div>
 
-                      
+
                               <div class="input-group mb-3">
                                 <label class="col-12">Paises</label>
-                                
+
                                 <div class="input-group-append">
                                   <label class="input-group-text" for="inputGroupSelect02">Opciones<i class="fa fa-caret-down" aria-hidden="true"></i></label>
                                 </div>
-                                
+
                                 <select formControlName="pais" class="custom-select" id="inputGroupSelect02"
                                 (change)="cambiarDepto($event.target.value)">
                                   <option *ngFor="let paises of listaPaises"  [value]="paises.COD_PAIS" >{{paises.NOMB_PAIS}}</option>
                                 </select>
-                                
+
                               </div>
 
                               <div class="input-group mb-3">
                                 <label class="col-12">Departamentos</label>
-                                
+
                                 <div class="input-group-append">
                                   <label class="input-group-text" for="inputGroupSelect02">Opciones</label>
                                 </div>
-                                
+
                                 <select formControlName="depart" class="custom-select" id="inputGroupSelect02"
                                 (change)="cambiarMunic($event.target.value)">
                                   <option *ngFor="let departamento of listaDepartementos"  [value]="departamento.COD_DEPTO" >{{departamento.NOM_DEPTO}}</option>
                                 </select>
-                                
+
                               </div>
 
                               <div class="input-group mb-3">
                                 <label class="col-12">Municipios</label>
-                                
+
                                 <div class="input-group-append">
                                   <label class="input-group-text" for="inputGroupSelect02">Opciones</label>
                                 </div>
-                                
+
                                 <select formControlName="muni" class="custom-select" id="inputGroupSelect02">
                                   <option *ngFor="let municipio of listaMunicipios"  [value]="municipio.COD_MUNI" >{{municipio.NOM_MUNI}}</option>
                                 </select>
-                                
+
+                              </div>
+
+
+                              <div class="input-group mb-3">
+                                <label class="col-12">Estado Civil</label>
+
+                                <div class="input-group-append">
+                                  <label class="input-group-text" for="inputGroupSelect02">Opciones</label>
+                                </div>
+
+                                <select formControlName="estadoC" class="custom-select" id="inputGroupSelect02">
+                                  <option *ngFor="let civil of listaEstadoCivil"  [value]="civil.codEstadoCivil" >{{civil.nombreEstadoCivil}}</option>
+                                </select>
+
                               </div>
 
 
                               <div class="input-group mb-3">
                                 <label class="col-12">Profesion Empleado</label>
-                                
+
                                 <div class="input-group-append">
                                   <label class="input-group-text" for="inputGroupSelect02">Opciones</label>
                                 </div>
-                                
-                                <select formControlName="depart" class="custom-select" id="inputGroupSelect02">
+
+                                <select formControlName="profesion" class="custom-select" id="inputGroupSelect02">
                                   <option *ngFor="let profesion of listaProfesion"  [value]="profesion.COD_PROFESION" >{{profesion.NOM_PROFESION}}</option>
                                 </select>
-                                
-                              </div> 
-                              
-                                
+
+                              </div>
+
+
                               <div class="input-group mb-3">
                                 <label class="col-12">Telefono</label>
                                 <div class="input-group-append">
                                   <label class="input-group-text" for="inputGroupSelect02"><i class="fa fa-phone" aria-hidden="true"></i></label>
                                 </div>
-                      
+
                                 <input type="text"  formControlName="telefonos" class="form-control"/>
-                      
+
                               </div>
 
                               <div class="input-group mb-3">
@@ -91,7 +105,7 @@
                                   <label class="input-group-text" for="inputGroupSelect02"><i class="fa fa-mobile" aria-hidden="true"></i></label>
                                 </div>
                                 <input type="text"  formControlName="cel" class="form-control"/>
-                      
+
                               </div>
 
                               <div class="input-group mb-3">
@@ -100,24 +114,24 @@
                                   <label class="input-group-text" for="inputGroupSelect02"><i class="fa fa-mobile" aria-hidden="true"></i></label>
                                 </div>
                                 <input type="email"  formControlName="correo" class="form-control"/>
-                      
+
                               </div>
 
                               <div class="input-group mb-3">
                                 <label class="col-12">Direccion</label>
-                      
+
                                 <div class="input-group-append">
                                   <label class="input-group-text" for="inputGroupSelect02"><i class="fa fa-map-marker" aria-hidden="true"></i></label>
                                 </div>
                                 <textarea class="form-control" formControlName="dir" rows="3"></textarea>
-                      
-                              </div>                     
+
+                              </div>
                             </app-card>
                           </form>
 
-                          
+
                         <div class="card">
-                                
+
                             <div class="card-footer">
                               <button class="btn btn-primary sm" (click)="guardar()">
                                 Guardar
@@ -138,68 +152,71 @@
                               <div class="input-group-append">
                                 <label class="input-group-text" for="inputGroupSelect02"><i class="fa fa-male" aria-hidden="true"></i></label>
                               </div>
-                    
+
                               <input type="text"  formControlName="institucion" class="form-control"/>
-                    
+
                             </div>
 
 
                             <div class="input-group mb-3">
                               <label class="col-12">Pais</label>
-                              
+
                               <div class="input-group-append">
                                 <label class="input-group-text" for="inputGroupSelect02">Opciones<i class="fa fa-caret-down" aria-hidden="true"></i></label>
                               </div>
-                              
+
                               <select formControlName="pais" class="custom-select"
                               (change)="cambiarDeptoNivel($event.target.value)"
                               >
                                 <option *ngFor="let paisesGral of listaPaises"  [value]="paisesGral.COD_PAIS" >{{paisesGral.NOMB_PAIS}}</option>
                               </select>
-                              
+
                             </div>
 
                             <div class="input-group mb-3">
                               <label class="col-12">Departamentos</label>
-                              
+
                               <div class="input-group-append">
                                 <label class="input-group-text" for="inputGroupSelect02">Opciones</label>
                               </div>
-                              
+
                               <select formControlName="depart" class="custom-select">
                                 <option *ngFor="let departamento of listaDepartementosNivel"  [value]="departamento.COD_DEPTO" >{{departamento.NOM_DEPTO}}</option>
                               </select>
-                              
-                            </div>   
-                            
-                            
+
+                            </div>
+
+
 
                             <div class="input-group mb-3">
                               <label class="col-12">Nivel Academico</label>
-                              
+
                               <div class="input-group-append">
                                 <label class="input-group-text" for="inputGroupSelect02">Opciones</label>
                               </div>
-                              
-                              <select formControlName="nivel" class="custom-select">
-                                <option *ngFor="let nivel of listaNivelAcademico"  [value]="nivel.COD_NIVEL_ACADEMICO" >{{nivel.NOM_NIVEL_ACADEMICO}}</option>
-                              </select>
-                              
-                            </div> 
 
-                        
+                              <select formControlName="nivel" class="form-control"   (change)="nivel($event)">
+                                <option value=""></option>
+                                <option *ngFor="let niveles of listaNivelAcademico" [value]="niveles.COD_NIVEL_ACADEMICO">{{niveles.NOM_NIVEL_ACADEMICO}}</option>
+                              </select>
+
+
+
+                            </div>
+
+
                             <div class="input-group mb-3">
                               <label class="col-12">Profesion</label>
-                              
+
                               <div class="input-group-append">
                                 <label class="input-group-text" for="inputGroupSelect02">Opciones</label>
                               </div>
-                              
+
                               <select formControlName="subNivel" class="custom-select">
                                 <option *ngFor="let profesion of listaProfesion"  [value]="profesion.COD_PROFESION" >{{profesion.NOM_PROFESION}}</option>
                               </select>
-                              
-                            </div> 
+
+                            </div>
 
 
                             <div class="row">
@@ -209,9 +226,9 @@
                                   <div class="input-group-append">
                                     <label class="input-group-text" for="inputGroupSelect02"><i class="fa fa-address-book" aria-hidden="true"></i></label>
                                   </div>
-                        
+
                                   <input type="number"  formControlName="anioIng" class="form-control"/>
-                        
+
                                 </div>
                               </div>
 
@@ -221,9 +238,9 @@
                                   <div class="input-group-append">
                                     <label class="input-group-text" for="inputGroupSelect02"><i class="fa fa-address-book" aria-hidden="true"></i></label>
                                   </div>
-                        
+
                                   <input type="number"  formControlName="anioEgre" class="form-control"/>
-                        
+
                                 </div>
                               </div>
 
@@ -233,9 +250,9 @@
                                   <div class="input-group-append">
                                     <label class="input-group-text" for="inputGroupSelect02"><i class="fa fa-address-book" aria-hidden="true"></i></label>
                                   </div>
-                        
+
                                   <input type="text"  formControlName="colegio" class="form-control"/>
-                        
+
                                 </div>
                               </div>
 
@@ -254,32 +271,34 @@
 
                       <div class="card">
                         <div class="card-body">
-                            <div class="table-responsive-lg">
+                            <div class="table-responsive">
                                 <table class="table">
                                     <thead>
                                       <tr>
-                                        <th scope="col">Nombre</th>
-                                        <th scope="col">Pais</th>
-                                        <th scope="col">Departamento</th>
-                                        <th scope="col">Nivel academico</th>
-                                        <th scope="col">Profesion</th>
+                                        <th scope="col">Nombre Institucion </th>
+                                        <th scope="col">Titulo Nivel Obtenido</th>
                                         <th scope="col">Año Ingreso</th>
+                                        <th scope="col">Año Egreso</th>
+                                        <th scope="col">N° Colegiado</th>
                                       </tr>
                                     </thead>
                                     <tbody>
-                                      <tr *ngFor="let item of listaNivelAcademicoTBl" >
-                                        <th scope="row">{{item.institucion}}</th>
-                                        <td>{{item.pais}}</td>
-                                        <td>{{item.depart}}</td>
-                                        <td>{{item.nivel}}</td>
-                                        <td>{{item.subNivel}}</td>
-                                        <td>{{item.anioIng}}</td>
+                                      <tr *ngFor="let item of listaNivelAcademicoTBl | paginate: { id: 'foo', itemsPerPage: 3,currentPage: p }" >
+                                        <th scope="row">{{item.NOM_INSTITUCION}}</th>
+                                        <td>{{item.nombre_nivel}}</td>
+                                        <td>{{item.ANIO_INGRESO}}</td>
+                                        <td>{{item.ANIO_EGRESO}}</td>
+                                        <td>{{item.NO_COLEGIADO}}</td>
                                       </tr>
                                     </tbody>
                                   </table>
+                                  <pagination-controls (pageChange)="p = $event" id="foo"  responsive="true"
+                                  previousLabel="Anterior"
+                                  nextLabel="Siguiente" ></pagination-controls>
+
 
                             </div>
-                        
+
                         </div>
                       </div>
 
@@ -298,9 +317,9 @@
                             <div class="input-group-append">
                               <label class="input-group-text" for="inputGroupSelect02"><i class="fa fa-male" aria-hidden="true"></i></label>
                             </div>
-                  
+
                             <input type="text"  formControlName="nombreCon" class="form-control"/>
-                  
+
                           </div>
 
                           <div class="row">
@@ -310,23 +329,42 @@
                                 <div class="input-group-append">
                                   <label class="input-group-text" for="inputGroupSelect02"><i class="fa fa-address-book" aria-hidden="true"></i></label>
                                 </div>
-                      
+
                                 <input type="number"  formControlName="telCon" class="form-control"/>
-                      
+
                               </div>
                             </div>
 
-                            <div class="col-md-9 col-xs-9">
+                            <div class="col-md-3 col-xs-3">
                               <div class="input-group mb-3">
                                 <label class="col-12">Trabajo/Ocupación</label>
                                 <div class="input-group-append">
                                   <label class="input-group-text" for="inputGroupSelect02"><i class="fa fa-address-book" aria-hidden="true"></i></label>
                                 </div>
-                      
+
                                 <input type="text"  formControlName="lugaTrabajo" class="form-control"/>
-                      
+
                               </div>
                             </div>
+
+
+
+                            <div class="col-md-3 col-xs-3">
+                              <div class="input-group mb-3">
+                                <label class="col-12">Parentesco</label>
+                                <div class="input-group-append">
+                                  <label class="input-group-text" for="inputGroupSelect02"><i class="fa fa-address-book" aria-hidden="true"></i></label>
+                                </div>
+
+                                <select formControlName="parentesco" id="raids" class="form-control">
+                                  <option *ngFor="let parent of listaParentesco; let i = index" [value]="parent.COD_PARENTESCO">
+                                      {{parent.NOM_PARENTESCO}}
+                                  </option>
+                              </select>
+                              </div>
+                            </div>
+
+
 
                           </div>
 
@@ -346,16 +384,16 @@
                                   <tr>
                                     <th scope="col">Nombre</th>
                                     <th scope="col">Telefono</th>
-                                    <th scope="col">Trabajo/Ocupación</th>
+                                    <th scope="col">Parentesco</th>
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  <tr *ngFor="let item of emergencias" >
-                                    <td>{{item.nombreCon}}</td>
-                                    <td>{{item.telCon}}</td>
-                                    <td>{{item.trabajoCon}}</td>
+                                  <tr  *ngFor="let item of emergencias" >
+                                    <td>{{item.NOMBRE}}</td>
+                                    <td>{{item.TELEFONO}}</td>
+                                    <td>{{item.COD_PARENTESCO}}</td>
                                   </tr>
-                                
+
                                 </tbody>
                               </table>
                             </div>
@@ -379,9 +417,9 @@
                           <div class="input-group-append">
                             <label class="input-group-text" for="inputGroupSelect02"><i class="fa fa-male" aria-hidden="true"></i></label>
                           </div>
-                
+
                           <input type="text"  formControlName="nombInstitucion" class="form-control"/>
-                
+
                         </div>
 
 
@@ -390,9 +428,9 @@
                           <div class="input-group-append">
                             <label class="input-group-text" for="inputGroupSelect02"><i class="fa fa-male" aria-hidden="true"></i></label>
                           </div>
-                
+
                           <input type="text"  formControlName="descripcion" class="form-control"/>
-                
+
                         </div>
 
                         <div class="input-group mb-3">
@@ -400,9 +438,9 @@
                           <div class="input-group-append">
                             <label class="input-group-text" for="inputGroupSelect02"><i class="fa fa-male" aria-hidden="true"></i></label>
                           </div>
-                
+
                           <input type="text"  formControlName="fecha" class="form-control"/>
-                
+
                         </div>
 
 
@@ -411,9 +449,9 @@
                           <div class="input-group-append">
                             <label class="input-group-text" for="inputGroupSelect02"><i class="fa fa-male" aria-hidden="true"></i></label>
                           </div>
-                
+
                           <input type="number"  formControlName="horas" class="form-control"/>
-                
+
                         </div>
 
                         <div class="input-group mb-3">
@@ -421,9 +459,9 @@
                           <div class="input-group-append">
                             <label class="input-group-text" for="inputGroupSelect02"><i class="fa fa-male" aria-hidden="true"></i></label>
                           </div>
-                
+
                           <input type="text"  formControlName="documentoValida" class="form-control"/>
-                
+
                         </div>
 
                         <div class="input-group mb-3">
@@ -431,9 +469,9 @@
                           <div class="input-group-append">
                             <label class="input-group-text" for="inputGroupSelect02"><i class="fa fa-male" aria-hidden="true"></i></label>
                           </div>
-                
+
                           <input type="number"  formControlName="nota" class="form-control"/>
-                
+
                         </div>
 
                         <div class="input-group mb-3">
@@ -441,16 +479,16 @@
                           <div class="input-group-append">
                             <label class="input-group-text" for="inputGroupSelect02"><i class="fa fa-male" aria-hidden="true"></i></label>
                           </div>
-                
+
                           <input  type="text"  formControlName="fechaCapacitacion" ngbDatepicker #d2="ngbDatepicker" (focus)="d2.open()" name="date_start" class="form-control"/>
 
-                
+
                         </div>
 
-                        
-                        
+
+
                         <div class="card">
-                                
+
                           <div class="card-footer">
                             <button class="btn btn-primary sm" [disabled]="capacitacionForm.invalid" (click)="agregarCapacitacion()">
                               Agregar &nbsp;<i class="fa fa-plus" aria-hidden="true"></i>
@@ -461,7 +499,7 @@
                         </div>
 
                         <div class="card my-2">
-                          
+
                           <div class="card-body">
                             <table class="table table-hover">
                               <thead>
@@ -483,7 +521,7 @@
                                   <td>{{item.DOCUMENTO_VALIDA}}</td>
                                   <td>{{item.NOTA}}</td>
                                 </tr>
-                                
+
                               </tbody>
                             </table>
                           </div>

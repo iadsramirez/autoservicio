@@ -45,7 +45,10 @@ export class NavRightComponent implements OnInit, DoCheck {
     this.gradientConfig = GradientConfig.config;
     this.tempuser=JSON.parse(localStorage.getItem('empleadoSession'));
     console.log('objeto json'+JSON.stringify(JSON.parse(localStorage.getItem('empleadoSession'))));
-    this.usuario=this.tempuser[0];
+    if(this.tempuser){
+      this.usuario=this.tempuser[0];
+    }
+
     console.log('Valores de usuario logeado'+JSON.stringify(this.usuario));
 
   }
@@ -70,7 +73,9 @@ export class NavRightComponent implements OnInit, DoCheck {
 
 salir(){
   this.autoServicio.logeado=false;
-  this.router.navigateByUrl('/')
+  window.localStorage.clear();
+  this.router.navigateByUrl('/');
+
 }
 
 

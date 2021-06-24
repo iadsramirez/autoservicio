@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgbCalendar, NgbDateAdapter, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { AutogestionService } from 'src/app/servicio/autogestion.service';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 import 'sweetalert2/src/sweetalert2.scss';
+import { NgbDateFRParserFormatter } from '../configuracion/ngb-date-fr-parser-formatter';
+
 //import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 //import 'sweetalert2/src/sweetalert2.scss'
@@ -14,7 +17,10 @@ import 'sweetalert2/src/sweetalert2.scss';
 @Component({
   selector: 'app-accion-personal',
   templateUrl: './accion-personal.component.html',
-  styleUrls: ['./accion-personal.component.scss']
+  styleUrls: ['./accion-personal.component.scss'],
+  providers: [
+    {provide: NgbDateParserFormatter, useClass: NgbDateFRParserFormatter}
+  ]
 })
 export class AccionPersonalComponent implements OnInit {
   empleado: any;
@@ -25,7 +31,7 @@ export class AccionPersonalComponent implements OnInit {
   listaNoAfectaPlanilla:Array<any>;
 
 
-  constructor(private autoGestion: AutogestionService, private formBuilder: FormBuilder) {
+  constructor(private ngbCalendar: NgbCalendar,private autoGestion: AutogestionService, private formBuilder: FormBuilder,private dateAdapter: NgbDateAdapter<string>) {
 
 
 
@@ -89,6 +95,9 @@ export class AccionPersonalComponent implements OnInit {
 
 
   }
+
+
+
 
   ngOnInit(): void {
   }

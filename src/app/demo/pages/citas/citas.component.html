@@ -35,7 +35,7 @@
               {{item.OBSERVACION}}
             </td>
             <td>
-              {{item.FECHA}}
+              {{item.FECHA | date:'dd/MM/yyyy'}}
             </td>
             <td>
               <span *ngIf="item.STATUS=='G'">Generado</span>
@@ -93,11 +93,11 @@
         <div class="input-group mb-3">
           <label class="col-12">Fecha Cita</label>
 
-          <input type="text"  formControlName="fechaCita" ngbDatepicker #d1="ngbDatepicker" (focus)="d1.open()" name="date_start" class="form-control"/>
+          <input type="text" [minDate]="minDate"  formControlName="fechaCita" ngbDatepicker #d1="ngbDatepicker" (focus)="d1.open()" name="date_start" class="form-control"/>
 
         </div>
-        
-        
+
+
         <div class="input-group mb-3" *ngIf="mostrarHora">
           <label class="col-12">Hora Cita: <strong>{{horas}}</strong></label>
           <button type="button" class="btn btn-info" (click)="agregarHora(7)">7</button>
@@ -115,12 +115,16 @@
 
         <div class="input-group mb-3" *ngIf="mostrarHora">
           <label class="col-12">Minutos: <strong>{{minutos}}</strong></label>
-          <button type="button" class="btn btn-info" (click)="agregarMinutos(0)">0</button>
+          <button type="button" class="btn btn-info" (click)="agregarMinutos(0)">00</button>
           <button type="button" class="btn btn-info" (click)="agregarMinutos(15)">15</button>
           <button type="button" class="btn btn-info" (click)="agregarMinutos(30)">30</button>
           <button type="button" class="btn btn-info" (click)="agregarMinutos(45)">45</button>
-          
 
+
+        </div>
+
+        <div class="input-group mb-3" >
+          <strong>Hora-Minutos</strong>:<span class="text-primary"><strong>{{horaCompleta}}</strong></span>
         </div>
 
         <div class="input-group mb-3">
@@ -128,15 +132,15 @@
           <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1"><i class="fa fa-comments" aria-hidden="true"></i></span>
           </div>
-          <textarea style = "text-transform:capitalize;" formControlName="observacion"  type="text" rows="4" cols="30" class="form-control" placeholder="" 
+          <textarea style = "text-transform:capitalize;" formControlName="observacion"  type="text" rows="4" cols="30" class="form-control" placeholder=""
             aria-describedby="basic-addon1">
           </textarea>
         </div>
 
 
-  
+
         <div class="card">
-          
+
           <div class="card-footer">
             <button type="button" class="btn btn-primary sm" (click)="guardar()" (click)="mySmallModalLabel.hide()">
               <i class="fa fa-check" aria-hidden="true"></i> &nbsp;Guardar

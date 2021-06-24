@@ -9,82 +9,91 @@ import { environment } from '../../environments/environment';
 })
 export class AutogestionService {
 
-  public logeado:boolean;
+  public logeado: boolean;
 
 
   constructor(private http: HttpClient) { }
 
 
 
-  obtenerDetallePrestamo(cia:any,emp:any,corr:any,deduc:any):Observable<any>{
-    return this.http.get(environment.baseURl+'detprestamos/'+cia+'/'+emp+'/'+corr+'/'+deduc);
+  obtenerDetallePrestamo(cia: any, emp: any, corr: any, deduc: any): Observable<any> {
+    return this.http.get(environment.baseURl + 'detprestamos/' + cia + '/' + emp + '/' + corr + '/' + deduc);
+  }
+
+  obtenerParentesco(cia: any): Observable<any> {
+    return this.http.get(environment.baseURl + 'parentescos/' + cia);
+  }
+
+  obtenerEmergencias(cia: any, codEmp: any): Observable<any> {
+    return this.http.get(environment.baseURl + 'tempEmergenciasEmp/' + cia + '/' + codEmp);
   }
 
 
-  obtenerCapacitaciones(cia:any,codEmp:any):Observable<any>{
-    return this.http.get(environment.baseURl+'capacitaciones/'+cia+'/'+codEmp);
+  obtenerCapacitaciones(cia: any, codEmp: any): Observable<any> {
+    return this.http.get(environment.baseURl + 'capacitaciones/' + cia + '/' + codEmp);
   }
 
 
-  guardarDatosGenerales(data:any):Observable<any>{
-    return this.http.post(environment.baseURl+'empleadosTemp/',data);
-      }
-
-
-  guardarNivelAcademico(data:any):Observable<any>{
-    return this.http.post(environment.baseURl+'tempNivelAcademico/',data);
-      }
-
-  obtenerPrestamo(cia:any,codEmp:any):Observable<any>{
-    return this.http.get(environment.baseURl+'prestamos/'+cia+'/'+codEmp);
-  }
-
-  guardarEmergencia(data:any):Observable<any>{
-    return this.http.post(environment.baseURl+'tempEmergencias/',data);
-      }
-
-
-  guardarCapacitacion(data:any):Observable<any>{
-    return this.http.post(environment.baseURl+'tempCapacitaciones/',data);
-      }
-
-
-  obtenerNivelAcademico(cia:any):Observable<any>{
-    return this.http.get(environment.baseURl+'nivelesacademicos/'+cia);
-  }
-
-  obtenerProfesiones(cia:any):Observable<any>{
-    return this.http.get(environment.baseURl+'profesiones/'+cia);
+  guardarDatosGenerales(data: any): Observable<any> {
+    return this.http.post(environment.baseURl + 'empleadosTemp/', data);
   }
 
 
-  obtenerMunicipio(codPais:any,codDepto):Observable<any>{
-    return this.http.get(environment.baseURl+'municipios/'+codPais+'/'+codDepto);
-  }
-
-  obtenerDepartamento(codPais:any):Observable<any>{
-    return this.http.get(environment.baseURl+'deptos/'+codPais);
+  guardarNivelAcademico(data: any): Observable<any> {
+    return this.http.post(environment.baseURl + 'tempNivelAcademico/', data);
   }
 
 
+  obtenerPrestamo(cia: any, codEmp: any): Observable<any> {
+    return this.http.get(environment.baseURl + 'prestamos/' + cia + '/' + codEmp);
+  }
 
-  obtenerPaises():Observable<any>{
-    return this.http.get(environment.baseURl+'paises');
+  guardarEmergencia(data: any): Observable<any> {
+    return this.http.post(environment.baseURl + 'tempEmergencias/', data);
   }
 
 
-  obtenerTipoAccionClinica(cia:any,codEmp:any,usuario:any):Observable<any>{
-    return this.http.get(environment.baseURl+'accionesPersonales/'+cia+'/'+codEmp+'/'+usuario);
+  guardarCapacitacion(data: any): Observable<any> {
+    return this.http.post(environment.baseURl + 'tempCapacitaciones/', data);
   }
 
 
-  obtenerTipoAccionNoAfectaPlanilla(cia:any,usuario:any):Observable<any>{
-    return this.http.get(environment.baseURl+'accionesNoAfectaPlanilla/'+cia+'/'+usuario);
+  obtenerNivelAcademico(cia: any): Observable<any> {
+    return this.http.get(environment.baseURl + 'nivelesacademicos/' + cia);
+  }
+
+  obtenerProfesiones(cia: any): Observable<any> {
+    return this.http.get(environment.baseURl + 'profesiones/' + cia);
   }
 
 
-  obtenerTipoAccion(cia:any,usuario:any):Observable<any>{
-    return this.http.get(environment.baseURl+'tiposAcciones/'+cia+'/'+usuario);
+  obtenerMunicipio(codPais: any, codDepto): Observable<any> {
+    return this.http.get(environment.baseURl + 'municipios/' + codPais + '/' + codDepto);
+  }
+
+  obtenerDepartamento(codPais: any): Observable<any> {
+    return this.http.get(environment.baseURl + 'deptos/' + codPais);
+  }
+
+
+
+  obtenerPaises(): Observable<any> {
+    return this.http.get(environment.baseURl + 'paises');
+  }
+
+
+  obtenerTipoAccionClinica(cia: any, codEmp: any, usuario: any): Observable<any> {
+    return this.http.get(environment.baseURl + 'accionesPersonales/' + cia + '/' + codEmp + '/' + usuario);
+  }
+
+
+  obtenerTipoAccionNoAfectaPlanilla(cia: any, usuario: any): Observable<any> {
+    return this.http.get(environment.baseURl + 'accionesNoAfectaPlanilla/' + cia + '/' + usuario);
+  }
+
+
+  obtenerTipoAccion(cia: any, usuario: any): Observable<any> {
+    return this.http.get(environment.baseURl + 'tiposAcciones/' + cia + '/' + usuario);
   }
 
 
@@ -94,43 +103,60 @@ export class AutogestionService {
   }
 
 
-  obtenerAccionesEmpleado(cia:any,codEmp:any,usr:any):Observable<any>{
-    return this.http.get(environment.baseURl+'accionesPersonales/'+cia+'/'+codEmp+'/'+usr);
+  obtenerAccionesEmpleado(cia: any, codEmp: any, usr: any): Observable<any> {
+    return this.http.get(environment.baseURl + 'accionesPersonales/' + cia + '/' + codEmp + '/' + usr);
   }
 
 
-  obtenerEmpleado(usuario:string):Observable<any>{
-    console.log('el usuario'+usuario);
-    return this.http.get(environment.baseURl+'usuarios/'+usuario);
+  obtenerEmpleado(usuario: string): Observable<any> {
+    console.log('el usuario' + usuario);
+    return this.http.get(environment.baseURl + 'usuarios/' + usuario);
   }
 
 
-  obtenerTotales(cia:number,emp:number):Observable<any>{
-    return this.http.get(environment.baseURl+'totalesGenerales/'+cia+'/'+emp);
-  }
-
-
-
-  obtenerProgramacionesCerradas(cia:number,emp:number):Observable<any>{
-    console.log('Obtencion parametros service'+cia);
-    console.log('Obtencion parametros service'+emp);
-
-    return this.http.get(environment.baseURl+'programacionPlanilla/'+cia+'/'+emp);
-
-  }
-
-  guardar(data:any):Observable<any>{
-return this.http.post(environment.baseURl+'accionesPersonales/',data);
+  obtenerTotales(cia: number, emp: number): Observable<any> {
+    return this.http.get(environment.baseURl + 'totalesGenerales/' + cia + '/' + emp);
   }
 
 
 
-  obtenerDetallePlanilla(cia:number,anio:number,mes:number
-    ,tipoPla:number,numPla:number,codEmp:number
-    ):Observable<any>{
-    return this.http.get(environment.baseURl+'detallePlanilla/'+cia+'/'+anio+'/'+mes+'/'+tipoPla+'/'+numPla+'/'+codEmp);
+  obtenerProgramacionesCerradas(cia: number, emp: number): Observable<any> {
+    console.log('Obtencion parametros service' + cia);
+    console.log('Obtencion parametros service' + emp);
+
+    return this.http.get(environment.baseURl + 'programacionPlanilla/' + cia + '/' + emp);
 
   }
+
+  guardar(data: any): Observable<any> {
+    return this.http.post(environment.baseURl + 'accionesPersonales/', data);
+  }
+
+
+
+  obtenerDetallePlanilla(cia: number, anio: number, mes: number
+    , tipoPla: number, numPla: number, codEmp: number
+  ): Observable<any> {
+    return this.http.get(environment.baseURl + 'detallePlanilla/' + cia + '/' + anio + '/' + mes + '/' + tipoPla + '/' + numPla + '/' + codEmp);
+
+  }
+
+
+
+  llenarDatosFichaExp(cia: number, codEmp: number): Observable<any> {
+    return this.http.get(environment.baseURl + 'empleadosTemp/' + cia + '/' + codEmp + '/');
+  }
+
+
+  obtenerEstadoCivil(): Observable<any> {
+    return this.http.get(environment.baseURlJAVAENDPOINT + 'listar-estado-civil');
+  }
+
+
+  obtenerNivelAcademicoEmp(cia:number,emp:number): Observable<any> {
+    return this.http.get(environment.baseURl + 'tempNivelAcademico'+'/'+cia+'/'+emp);
+  }
+
 
 
 

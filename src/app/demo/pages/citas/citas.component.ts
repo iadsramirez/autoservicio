@@ -4,20 +4,28 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 import 'sweetalert2/src/sweetalert2.scss';
+import { NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateFRParserFormatter } from '../configuracion/ngb-date-fr-parser-formatter';
 
 @Component({
   selector: 'app-citas',
   templateUrl: './citas.component.html',
-  styleUrls: ['./citas.component.scss']
+  styleUrls: ['./citas.component.scss'],
+  providers: [
+    { provide: NgbDateParserFormatter, useClass: NgbDateFRParserFormatter }
+  ]
 })
 export class CitasComponent implements OnInit {
 
-  minutos:any;
+
+  minDate: NgbDateStruct;
+  minutos: any;
   empleado: any;
-  listadoClinina:Array<any>;
+  listadoClinina: Array<any>;
   registerAccionForm: FormGroup;
-  horas:any;
-  mostrarHora:boolean=true;
+  horas: any;
+  mostrarHora: boolean = true;
+  horaCompleta: any;
 
 
 
@@ -25,7 +33,10 @@ export class CitasComponent implements OnInit {
     this.autoGestion.logeado = true;
     this.empleado = JSON.parse(localStorage.getItem('empleadoSession'));
 
-    
+    const current = new Date();
+    this.minDate = { year: current.getFullYear(), month: current.getMonth() + 1, day: current.getDate() };
+
+
     this.registerAccionForm = this.formBuilder.group({
       fechaCita: [, Validators.required],
       empleado: [, Validators.required],
@@ -36,15 +47,15 @@ export class CitasComponent implements OnInit {
 
     this.autoGestion.obtenerTipoAccionClinica(this.empleado[0].COD_CIA, this.empleado[0].COD_EMP,
       this.empleado[0].USUARIO).subscribe(
-        data=>{
-         
-          this.listadoClinina=data;
+        data => {
+
+          this.listadoClinina = data;
           console.log(JSON.stringify(this.listadoClinina));
-         this.listadoClinina=this.listadoClinina.filter(item=>item.COD_TIPOACCION==40);
+          this.listadoClinina = this.listadoClinina.filter(item => item.COD_TIPOACCION == 40);
         }
       );
 
-   }
+  }
 
   ngOnInit(): void {
   }
@@ -59,45 +70,63 @@ export class CitasComponent implements OnInit {
     const fecha = { day: fechaActual.getDate(), month: fechaActual.getMonth() + 1, year: fechaActual.getFullYear() };
 
     this.registerAccionForm.get('empleado').setValue(empleado[0].NOMBRE);
-   
+
 
 
   }
 
-agregarMinutos(valor:any){
-this.minutos=valor;
-}
-
-  agregarHora(valor:any){
-    this.horas=valor;
+  agregarMinutos(valor: any) {
+    this.minutos = valor;
+    let valorXtra: string = '';
+    if (this.minutos === 0) {
+      valorXtra='0';
+    }
+    this.horaCompleta = this.horas + ':' + this.minutos+valorXtra;
   }
 
-  guardar(){
+  agregarHora(valor: any) {
+    this.horas = valor;
+  }
 
-    const fechas=this.registerAccionForm.get('fechaCita').value;
+  guardar() {
 
-    let fecha=new Date(Number(fechas.year),Number(fechas.month),Number(fechas.day));
+    const fechas = this.registerAccionForm.get('fechaCita').value;
 
-    const objeto={
+    let fecha = new Date(Number(fechas.year), Number(fechas.month), Number(fechas.day));
 
-      cia:this.empleado[0].COD_CIA,
-      emp:this.empleado[0].COD_EMP,
+    const objeto = {
+
+      cia: this.empleado[0].COD_CIA,
+      emp: this.empleado[0].COD_EMP,
       //tipoAcc:this.registerAccionForm.get('accion').value,
-      fecha:String(fechas.day)+'/'+String(fechas.month)+'/'+String(fechas.year),
-      observacion:this.registerAccionForm.get('observacion').value,
-      usrC:this.empleado[0].USUARIO,
-      tipoAcc:40,
-      estado:'G',
-      horas:this.horas,
+      fecha: String(fechas.day) + '/' + String(fechas.month) + '/' + String(fechas.year),
+      observacion: this.registerAccionForm.get('observacion').value,
+      usrC: this.empleado[0].USUARIO,
+      tipoAcc: 40,
+      estado: 'G',
+      horas: this.horas,
     };
-    console.log('objeto a api'+JSON.stringify(objeto));
+    console.log('objeto a api' + JSON.stringify(objeto));
 
     this.autoGestion.guardar(objeto).subscribe(
-      data=>{
-        console.log('RESPUESTA GUARDADO'+JSON.stringify(data));
+      data => {
+        console.log('RESPUESTA GUARDADO' + JSON.stringify(data));
         Swal.fire('Datos Guardados');
 
-        this.obtenerLista();
+        Swal.fire({
+          title: '',
+          text: "DATOS GUARDADOS",
+          icon: 'success',
+          showCancelButton: false,
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'CERRAR'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.obtenerLista();
+          }
+        })
+
+
         //this.toastr.success('Datos Guardado', '');
       }
     );
@@ -106,22 +135,23 @@ this.minutos=valor;
   }
 
 
-  obtenerLista(){
+  obtenerLista() {
     this.autoGestion.obtenerTipoAccionClinica(this.empleado[0].COD_CIA, this.empleado[0].COD_EMP,
       this.empleado[0].USUARIO).subscribe(
-        data=>{
-          console.log(data);
-          this.listadoClinina=data;
-         // this.listadoClinina=this.listadoClinina.filter(item=>{item.COD_TIPOACCION==40});
+        data => {
+          // console.log(data);
+          this.listadoClinina = data;
+          this.listadoClinina = this.listadoClinina.filter(item => parseInt(item.COD_TIPOACCION) === 40);
         }
       );
-      
+
   }
 
 
-  limpiar(){
+  limpiar() {
 
-    this.horas='';
+    this.horas = '';
+    this.horaCompleta = '';
   }
 
 }

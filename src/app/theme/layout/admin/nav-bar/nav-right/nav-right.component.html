@@ -1,5 +1,5 @@
 <ul class="navbar-nav ml-auto">
-  <li>
+  <li *ngIf="false">
     <div class="dropdown" ngbDropdown placement="auto">
       <a ngbDropdownToggle href="javascript:" data-toggle="dropdown"><i class="icon feather icon-bell"></i><span class="badge bg-danger"><span class="sr-only"></span></span></a>
       <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right notification">
@@ -51,7 +51,7 @@
       </div>
     </div>
   </li>
-  <li (click)="this.visibleUserList = !this.visibleUserList;">
+  <li *ngIf="false" (click)="this.visibleUserList = !this.visibleUserList;">
     <div class="dropdown">
       <a href="javascript:" class="displayChatbox dropdown-toggle">
         <i class="icon feather icon-mail"></i><span class="badge bg-success"><span class="sr-only"></span></span>
@@ -61,12 +61,12 @@
   <li>
     <div class="dropdown drp-user" ngbDropdown placement="auto">
       <a href="javascript:" ngbDropdownToggle data-toggle="dropdown">
-        <img src="assets/images/user/avatar-1.jpg" class="img-radius wid-40" alt="User-Profile-Image">
+        <img src="assets/images/user/avatar-15.jpg" class="img-radius wid-40" alt="User-Profile-Image">
       </a>
       <div class="dropdown-menu dropdown-menu-right profile-notification" ngbDropdownMenu>
         <div class="pro-head">
-          <img src="assets/images/user/avatar-1.jpg" class="img-radius" alt="User-Profile-Image">
-          <span>{{usuario.USUARIO}}</span>
+          <img src="assets/images/user/avatar-15.jpg" class="img-radius" alt="User-Profile-Image">
+          <span>{{usuario?.USUARIO}}</span>
           <a href="javascript:" class="dud-logout" title="Logout">
             <i class="feather icon-log-out"></i>
           </a>
@@ -81,6 +81,7 @@
   </li>
 </ul>
 
+<!--
 <section class="header-user-list" *ngIf="visibleUserList && !this.gradientConfig['rtl-layout']" [ngClass]="{'open': visibleUserList}" [@slideInOutLeft]>
   <app-chat-user-list (onChatToggle)="onChatToggle($event)" (onChatCollapse)="this.visibleUserList = !this.visibleUserList; this.chatMessage = false;"></app-chat-user-list>
 </section>
@@ -88,6 +89,9 @@
 <section class="header-chat" *ngIf="chatMessage && !this.gradientConfig['rtl-layout']" [ngClass]="{'open': chatMessage}" [@slideInOutLeft]>
   <app-chat-msg (onChatToggle)="this.chatMessage = !this.chatMessage" [friendId]="friendId"></app-chat-msg>
 </section>
+
+-->
+
 
 <section class="header-user-list" *ngIf="visibleUserList && this.gradientConfig['rtl-layout']" [ngClass]="{'open': visibleUserList}" [@slideInOutRight]>
   <app-chat-user-list (onChatToggle)="onChatToggle($event)" (onChatCollapse)="this.visibleUserList = !this.visibleUserList; this.chatMessage = false;"></app-chat-user-list>

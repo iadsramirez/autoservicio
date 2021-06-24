@@ -1,5 +1,5 @@
 <div class="row">
-  <app-card cardTitle="" class="col-md-12 col-xl-12" [options]="false" *ngFor="let item of objetoTotales">
+  <app-card cardTitle="Resumen de Montos Mensuales" class="col-md-12 col-xl-12" [options]="false" *ngFor="let item of objetoTotales">
     <button type="button" class="btn btn-primary col-md-4 col-xl-4">DEVENGADO:<span
         class="badge badge-light">{{item.DEVENGADO | currency }}</span></button>
     <button type="button" class="btn btn-primary ml-2 col-md-4 col-xl-4">DEDUCCIONES:<span
@@ -19,10 +19,9 @@
           <tr>
             <th scope="col">#</th>
             <th scope="col">Planilla</th>
-            <th scope="col">Numero de Planilla</th>
-            <th scope="col">Año</th>
-            <th scope="col">Mes</th>
-            <th scope="col">Empleado</th>
+            <th style="text-align: center;" scope="col">Año</th>
+            <th style="text-align: center;" scope="col">Mes</th>
+            <th style="text-align: center;" scope="col"># Planilla</th>
             <th scope="col">Detalle</th>
           </tr>
         </thead>
@@ -31,10 +30,9 @@
             *ngFor="let planilla of listadoProgramacionesCerradas  | paginate: { itemsPerPage: 10, currentPage: p }  ; index as i">
             <td>{{i+1}}</td>
             <td>{{planilla.NOM_TIPOPLA}}</td>
-            <td>{{planilla.NUM_PLANILLA}}</td>
-            <td>{{planilla.ANIO}}</td>
-            <td>{{planilla.MES}}</td>
-            <td>{{planilla.COD_EMP}}</td>
+            <td style="text-align: center;">{{planilla.ANIO}}</td>
+            <td style="text-align: center;">{{planilla.MES}}</td>
+            <td style="text-align: center;" >{{planilla.NUM_PLANILLA}}</td>
             <td>
               <button class="btn btn-primary" (click)="llenarDetalle(planilla)" data-toggle="modal"
                 (click)="myLargeModalLabel.show()">
@@ -78,16 +76,24 @@
     <div class="container">
 
       <div class="row my-2">
-        <div class="form-group">
-          <h6>Tipo Planilla: <span style="color: blue;">{{planilla.NOM_TIPOPLA}}</span> </h6> 
-          <h6>Nº Planilla: <span style="color: blue;">{{planilla.NUM_PLANILLA}}</span> </h6>
-          <h6>Año: <span style="color: blue;">{{planilla.ANIO}}</span> </h6>
-          <h6>Mes: <span style="color: blue;">{{planilla.MES}}</span> </h6>
-        </div>
+
+          <div class="col-md-8">
+            <h6>Tipo Planilla: <span style="color: blue;">{{planilla.NOM_TIPOPLA}}</span> </h6>
+          </div>
+          <div class="col-md-3">
+            <h6>Nº Planilla: <span style="color: blue;">{{planilla.NUM_PLANILLA}}</span> </h6>
+          </div>
+          <div class="col-md-2">
+            <h6>Año: <span style="color: blue;">{{planilla.ANIO}}</span> </h6>
+          </div>
+          <div class="col-md-2">
+            <h6>Mes: <span style="color: blue;">{{planilla.MES}}</span> </h6>
+          </div>
+
       </div>
 
-    </div>  
-    
+    </div>
+
 
   </div>
   <div class="app-modal-body">
@@ -95,15 +101,13 @@
       <thead style="color: white;background-color:black;">
         <tr>
           <th scope="col">#</th>
-          <th scope="col">Empleado</th>
           <th scope="col">Concepto</th>
-          <th scope="col">Monto</th>
+          <th scope="col" style="text-align: right;" >Monto</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let detalle of listaDetallePlanilla ; index as i">
           <th scope="row">{{i+1}}</th>
-          <td>{{detalle.NOMBRE}}</td>
           <td>{{detalle.CONCEPTO}}</td>
           <td style="text-align: right;">{{detalle.MONTO_CONCEPTO  | currency }}</td>
         </tr>
