@@ -170,8 +170,12 @@ mostrarHora:boolean=false;
       total=86400000;
      }
 
+     let sumaDias:number=total/(1000*60*60*24);
+     if(!( (valor1.year==valor2.year) && (valor1.month==valor2.month) && (valor1.day==valor2.day)) ){
+      sumaDias=sumaDias+1;
+     }
 
-      this.registerAccionForm.get('dias').setValue(total/(1000*60*60*24));
+      this.registerAccionForm.get('dias').setValue(sumaDias);
 
   }
 

@@ -79,7 +79,7 @@
           <td>{{detalle.ANIO}}</td>
           <td>{{detalle.MES}}</td>
           <td>{{detalle.NUM_PLANILLA}}</td>
-          <td>{{detalle.FECHA}}</td>
+          <td>{{detalle.FECHA  | date:'dd/MM/yyyy'}}</td>
           <td style="text-align: right;"  >{{detalle.CARGO | currency }}</td>
           <td style="text-align: right;"  >{{detalle.ABONO | currency }}</td>
         </tr>

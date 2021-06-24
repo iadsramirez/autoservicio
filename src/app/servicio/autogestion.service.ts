@@ -83,7 +83,7 @@ export class AutogestionService {
 
 
   obtenerTipoAccionClinica(cia: any, codEmp: any, usuario: any): Observable<any> {
-    return this.http.get(environment.baseURl + 'accionesPersonales/' + cia + '/' + codEmp + '/' + usuario);
+    return this.http.get(environment.baseURl + 'accionesPersonales/' + cia + '/' + codEmp + '/' + usuario+'/'+40);
   }
 
 
