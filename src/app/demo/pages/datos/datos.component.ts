@@ -316,7 +316,7 @@ export class DatosComponent implements OnInit {
       generales.muni = this.empleadoForm.get('muni').value;
     }
 
-    generales.zona = 1;
+  //  generales.zona = 1;
 
     if (this.empleadoForm.get('telefonos').dirty) {
       generales.telefonos = this.empleadoForm.get('telefonos').value;
@@ -331,8 +331,8 @@ export class DatosComponent implements OnInit {
       generales.dir = this.empleadoForm.get('dir').value;
     }
 
-    generales.aldea = 1;
-    generales.parentescoPept = 2;
+    //generales.aldea = 1;
+   // generales.parentescoPept = 2;
 
 
 
