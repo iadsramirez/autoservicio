@@ -70,6 +70,7 @@
           <th scope="col">Fecha</th>
           <th scope="col" style="text-align: right;" >Cargo</th>
           <th scope="col" style="text-align: right;" >Abono</th>
+          <th scope="col" style="text-align: right;" >Saldo</th>
         </tr>
       </thead>
       <tbody>
@@ -82,8 +83,22 @@
           <td>{{detalle.FECHA  | date:'dd/MM/yyyy'}}</td>
           <td style="text-align: right;"  >{{detalle.CARGO | currency }}</td>
           <td style="text-align: right;"  >{{detalle.ABONO | currency }}</td>
+          <td style="text-align: right;"  >{{detalle.SALDO | currency }}</td>
         </tr>
       </tbody>
+      <tfoot>
+        <tr>
+            <td style="font-weight: bolder;">{{'TOTALES'}}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td style="text-align: right;font-weight: bolder;" >{{cargo  | number : '1.2-2' }}</td>
+            <td style="text-align: right;font-weight: bolder;" >{{abono  | number : '1.2-2' }}</td>
+            <td style="text-align: right;font-weight: bolder;" >{{saldo  | number : '1.2-2' }}</td>
+        </tr>
+      </tfoot>
     </table>
 
     <pagination-controls id="foo2" (pageChange)="p = $event"

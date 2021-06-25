@@ -11,6 +11,9 @@ export class PrestamoComponent implements OnInit {
   listadoPrestamo:Array<any>=[];
   empleado:any;
   listaDetallePrestamo:Array<any>;
+  cargo:number;
+  abono:number;
+  saldo:number;
 
   constructor(private autoServicio:AutogestionService) {
     this.autoServicio.logeado=true;
@@ -33,10 +36,34 @@ export class PrestamoComponent implements OnInit {
     this.autoServicio.obtenerDetallePrestamo(this.empleado[0].COD_CIA,this.empleado[0].COD_EMP,data.CORRELATIVO,data.COD_DEDUC).subscribe(
 
       detalle=>{
-        console.log(JSON.stringify(detalle));
+        console.log('******>>>'+JSON.stringify(detalle));
         this.listaDetallePrestamo=detalle;
+        this.sumatorias(detalle);
       }
     );
+  }
+
+
+   sumatorias(lista:Array<any>):void{
+    this.cargo=0;
+
+    lista.forEach(detalle=>{
+      if(detalle.CARGO){
+        this.cargo=this.cargo=parseFloat(detalle.CARGO);
+      }
+
+      if(detalle.ABONO){
+        this.abono=this.abono=parseFloat(detalle.ABONO);
+      }
+
+      if(detalle.SALDO){
+        this.saldo=this.saldo=parseFloat(detalle.SALDO);
+      }
+
+
+
+    });
+
   }
 
 }

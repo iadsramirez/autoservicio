@@ -4,6 +4,8 @@ import { AutogestionService } from '../../../servicio/autogestion.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import swal from 'sweetalert2';
 import { ObjeNivel } from '../modelos/ObjeNivel';
+import { filter, map, pairwise, startWith } from 'rxjs/operators';
+import { Generales } from './modelo/Generales';
 
 @Component({
   selector: 'app-datos',
@@ -35,8 +37,8 @@ export class DatosComponent implements OnInit {
   listaCapacitaciones: Array<any> = [];
   emergencias: Array<any> = [];
   listaNivelAcademicoTBl: Array<any> = [];
-  listaEstadoCivil:Array<any>;
-  listaParentesco:Array<any>;
+  listaEstadoCivil: Array<any>;
+  listaParentesco: Array<any>;
 
 
 
@@ -54,12 +56,12 @@ export class DatosComponent implements OnInit {
 
     if (this.empleado) {
 
-      this.autoGestion.obtenerCapacitaciones(this.empleado[0].COD_CIA,this.empleado[0].COD_EMP).subscribe(data=>this.listaCapacitaciones=data);
+      this.autoGestion.obtenerCapacitaciones(this.empleado[0].COD_CIA, this.empleado[0].COD_EMP).subscribe(data => this.listaCapacitaciones = data);
 
-      this.autoGestion.obtenerParentesco(this.empleado[0].COD_CIA).subscribe(data=>this.listaParentesco=data);
-      this.autoGestion.obtenerEmergencias(this.empleado[0].COD_CIA,this.empleado[0].COD_EMP).subscribe(eme=>this.emergencias=eme);
+      this.autoGestion.obtenerParentesco(this.empleado[0].COD_CIA).subscribe(data => this.listaParentesco = data);
+      this.autoGestion.obtenerEmergencias(this.empleado[0].COD_CIA, this.empleado[0].COD_EMP).subscribe(eme => this.emergencias = eme);
 
-      this.autoGestion.obtenerEstadoCivil().subscribe(data=>this.listaEstadoCivil=data);
+      this.autoGestion.obtenerEstadoCivil().subscribe(data => this.listaEstadoCivil = data);
       this.llenarNivelAcademico(this.empleado[0].COD_CIA, this.empleado[0].COD_EMP);
 
 
@@ -112,7 +114,7 @@ export class DatosComponent implements OnInit {
       nombreCon: [],
       telCon: [],
       lugaTrabajo: [],
-      parentesco:[]
+      parentesco: []
     });
 
 
@@ -121,7 +123,7 @@ export class DatosComponent implements OnInit {
 
       cia: [],
       emp: [],
-      nivel: ['',[]],
+      nivel: ['', []],
       institucion: [],
       anioIng: [],
       anioEgre: [],
@@ -281,33 +283,87 @@ export class DatosComponent implements OnInit {
 
 
   guardar() {
-    const generales = {
-      cia: this.empleado[0].COD_CIA,
-      emp: this.empleado[0].COD_EMP,
-      estadoC: this.empleadoForm.get('estadoC').value,
-      correo: this.empleadoForm.get('correo').value,
-      profesion: Number(this.empleadoForm.get('profesion').value),
-      pais: Number(this.empleadoForm.get('pais').value),
-      depart: Number(this.empleadoForm.get('depart').value),
-      muni: Number(this.empleadoForm.get('muni').value),
-      zona: 1,
-      telefonos: this.empleadoForm.get('telefonos').value,
-      cel: this.empleadoForm.get('cel').value,
-      dir: this.empleadoForm.get('dir').value,
-      aldea: 1,
-      parentescoPept: 2,
-      asociadoPep: "-",
-      cargoPep: "",
-      institucionPep: "",
-      tipoVivienda: "",
-      otraVivienda: "",
-      tipoSangre: "+ORH",
-      nombreCon: "",
-      telCon: "",
-      trabajoCon: ""
-    };
 
-    console.log('LOQ EU MANDO AL SAVE'+JSON.stringify(generales));
+
+
+
+    let generales: Generales = new Generales();
+
+    generales.cia = this.empleado[0].COD_CIA;
+    generales.emp = this.empleado[0].COD_EMP;
+
+    if (this.empleadoForm.get('estadoC').dirty) {
+      generales.estadoC = this.empleadoForm.get('estadoC').value;
+    }
+
+    if (this.empleadoForm.get('correo').dirty) {
+      generales.correo = this.empleadoForm.get('correo').value;
+    }
+
+    if (this.empleadoForm.get('profesion').dirty) {
+      generales.profesion = this.empleadoForm.get('profesion').value;
+    }
+
+    if (this.empleadoForm.get('pais').dirty) {
+      generales.pais = this.empleadoForm.get('pais').value;
+    }
+
+    if (this.empleadoForm.get('depart').dirty) {
+      generales.depart = this.empleadoForm.get('depart').value;
+    }
+
+    if (this.empleadoForm.get('muni').dirty) {
+      generales.muni = this.empleadoForm.get('muni').value;
+    }
+
+    generales.zona = 1;
+
+    if (this.empleadoForm.get('telefonos').dirty) {
+      generales.telefonos = this.empleadoForm.get('telefonos').value;
+    }
+
+
+    if (this.empleadoForm.get('cel').dirty) {
+      generales.cel = this.empleadoForm.get('cel').value;
+    }
+
+    if (this.empleadoForm.get('dir').dirty) {
+      generales.dir = this.empleadoForm.get('dir').value;
+    }
+
+    generales.aldea = 1;
+    generales.parentescoPept = 2;
+
+
+
+    /*
+            const generales = {
+              cia: this.empleado[0].COD_CIA,
+              emp: this.empleado[0].COD_EMP,
+              estadoC: this.empleadoForm.get('estadoC').value,
+              correo: this.empleadoForm.get('correo').value,
+              profesion: Number(this.empleadoForm.get('profesion').value),
+              pais: Number(this.empleadoForm.get('pais').value),
+              depart: Number(this.empleadoForm.get('depart').value),
+              muni: Number(this.empleadoForm.get('muni').value),
+              zona: 1,
+              telefonos: this.empleadoForm.get('telefonos').value,
+              cel: this.empleadoForm.get('cel').value,
+              dir: this.empleadoForm.get('dir').value,
+              aldea: 1,
+              parentescoPept: 2,
+              asociadoPep: "-",
+              cargoPep: "",
+              institucionPep: "",
+              tipoVivienda: "",
+              otraVivienda: "",
+              tipoSangre: "+ORH",
+              nombreCon: "",
+              telCon: "",
+              trabajoCon: ""
+            };*/
+
+    console.log('LOQ EU MANDO AL SAVE' + JSON.stringify(generales));
 
     this.autoGestion.guardarDatosGenerales(generales).subscribe(
 
@@ -317,10 +373,16 @@ export class DatosComponent implements OnInit {
 
       }
     );
+
+
   }
 
 
 
+
+  valueDetection() {
+    console.log(this.empleadoForm.get('estadoC').dirty);
+  }
 
 
   agregarCapacitacion() {
@@ -341,18 +403,18 @@ export class DatosComponent implements OnInit {
       NOTA: Number(this.capacitacionForm.get('nota').value)
     };
 
-    console.log('Objeto que se manda al guardar:'+JSON.stringify(capa));
+    console.log('Objeto que se manda al guardar:' + JSON.stringify(capa));
 
     this.autoGestion.guardarCapacitacion(capa).subscribe(
       capa => {
         // console.log('repsuesta guardado'+capa);
-        this.autoGestion.obtenerCapacitaciones(this.empleado[0].COD_CIA,this.empleado[0].COD_EMP).subscribe(data=>this.listaCapacitaciones=data);
+        this.autoGestion.obtenerCapacitaciones(this.empleado[0].COD_CIA, this.empleado[0].COD_EMP).subscribe(data => this.listaCapacitaciones = data);
         swal.fire({ toast: true, position: 'top-end', showConfirmButton: false, timer: 3000, title: 'Capacitacion!', text: 'Capacitacion Agregada', icon: 'success', });
 
       }
     );
 
-   // this.listaCapacitaciones.push(capa);
+    // this.listaCapacitaciones.push(capa);
     this.capacitacionForm.reset();
 
 
@@ -376,14 +438,14 @@ export class DatosComponent implements OnInit {
       .subscribe(
         emergencia => {
           console.log('rep emergencia:' + JSON.stringify(emergencia));
-          this.autoGestion.obtenerEmergencias(this.empleado[0].COD_CIA,this.empleado[0].COD_EMP).subscribe(eme=>this.emergencias=eme);
+          this.autoGestion.obtenerEmergencias(this.empleado[0].COD_CIA, this.empleado[0].COD_EMP).subscribe(eme => this.emergencias = eme);
           swal.fire({ toast: true, position: 'top-end', showConfirmButton: false, timer: 3000, title: 'Emergencia!', text: 'Emergencia Agregada', icon: 'success', });
 
         }
       );
     this.emergenciaForm.reset();
 
-   // this.emergencias.push(emergency);
+    // this.emergencias.push(emergency);
   }
 
 
@@ -415,7 +477,7 @@ export class DatosComponent implements OnInit {
       }
     );
 
-   // this.listaNivelAcademicoTBl.push(nivel);
+    // this.listaNivelAcademicoTBl.push(nivel);
 
     this.preparacionForm.reset();
   }
@@ -425,7 +487,7 @@ export class DatosComponent implements OnInit {
 
   llenarFicha(data: any): void {
 
-    if(data){
+    if (data) {
       this.empleadoForm.get('pais').setValue(data[0].COD_PAIS);
       this.empleadoForm.get('pais').disable();
       this.cambiarDepto(data[0].COD_PAIS);
@@ -446,28 +508,28 @@ export class DatosComponent implements OnInit {
   }
 
 
-  llenarNivelAcademico(cia:number,emp:number){
+  llenarNivelAcademico(cia: number, emp: number) {
 
-    this.autoGestion.obtenerNivelAcademicoEmp(cia,emp).subscribe(
-      data=>{this.listaNivelAcademicoTBl=data}
+    this.autoGestion.obtenerNivelAcademicoEmp(cia, emp).subscribe(
+      data => { this.listaNivelAcademicoTBl = data }
     );
   }
 
 
-  nivel($event){
-   let value:number = $event.target.value;
+  nivel($event) {
+    let value: number = $event.target.value;
 
     this.autoGestion.obtenerNivelAcademico(3).subscribe(
-      data=>{
-        let array:Array<any>;
-        array=data;
+      data => {
+        let array: Array<any>;
+        array = data;
         array.forEach(
-          datos=>{
-           // console.log(JSON.stringify(datos));
+          datos => {
+            // console.log(JSON.stringify(datos));
 
-            if(datos.COD_NIVEL_ACADEMICO==value){
+            if (datos.COD_NIVEL_ACADEMICO == value) {
               this.obtenerNivelAcademico(datos);
-              console.log('EL NIVEL:'+ value);
+              console.log('EL NIVEL:' + value);
             }
           }
         );
@@ -478,8 +540,8 @@ export class DatosComponent implements OnInit {
   }
 
 
-  obtenerNivelAcademico(param:any){
-    console.log('OBJETO'+JSON.stringify(param));
+  obtenerNivelAcademico(param: any) {
+    console.log('OBJETO' + JSON.stringify(param));
   }
 
 

@@ -144,7 +144,7 @@ export class AutogestionService {
 
 
   llenarDatosFichaExp(cia: number, codEmp: number): Observable<any> {
-    return this.http.get(environment.baseURl + 'empleadosTemp/' + cia + '/' + codEmp + '/');
+    return this.http.get(environment.baseURl + 'getempleado/' + cia + '/' + codEmp + '/');
   }
 
 

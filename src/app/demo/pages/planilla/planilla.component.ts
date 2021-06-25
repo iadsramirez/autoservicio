@@ -8,6 +8,8 @@ import { AutogestionService } from '../../../servicio/autogestion.service';
 })
 export class PlanillaComponent implements OnInit {
 
+  sumaEgreso:number;
+  suma:number;
   planilla:any={};
   empleado: any;
   objetoTotales: any;
@@ -75,9 +77,38 @@ export class PlanillaComponent implements OnInit {
           this.listaDetallePlanilla=valor;
           console.log('--------------detall-');
           console.log(JSON.stringify(valor));
+          this.calculosEgreso(valor);
+          this.calculoIngreso(valor);
         }
       );
   }
+
+
+calculosEgreso(listado:Array<any>):Number{
+   this.suma=0;
+
+  listado.forEach(data=>{
+    if(data.INGRESO){
+      this.suma=this.suma+parseFloat(data.INGRESO);
+    }
+
+  });
+
+  return this.suma;
+}
+
+calculoIngreso(listado:Array<any>):Number{
+  this.sumaEgreso=0;
+
+ listado.forEach(data=>{
+   if(data.EGRESO){
+     this.sumaEgreso=this.sumaEgreso+parseFloat(data.EGRESO);
+   }
+
+ });
+
+ return this.sumaEgreso;
+}
 
 
 

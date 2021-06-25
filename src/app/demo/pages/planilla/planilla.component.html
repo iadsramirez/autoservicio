@@ -1,5 +1,5 @@
 <div class="row">
-  <app-card cardTitle="Resumen de Montos Mensuales" class="col-md-12 col-xl-12" [options]="false" *ngFor="let item of objetoTotales">
+  <app-card cardTitle="Resumen de Montos Anuales" class="col-md-12 col-xl-12" [options]="false" *ngFor="let item of objetoTotales">
     <button type="button" class="btn btn-primary col-md-4 col-xl-4">DEVENGADO:<span
         class="badge badge-light">{{item.DEVENGADO | currency }}</span></button>
     <button type="button" class="btn btn-primary ml-2 col-md-4 col-xl-4">DEDUCCIONES:<span
@@ -102,16 +102,26 @@
         <tr>
           <th scope="col">#</th>
           <th scope="col">Concepto</th>
-          <th scope="col" style="text-align: right;" >Monto</th>
+          <th scope="col" style="text-align: right;" >Ingreso</th>
+          <th scope="col" style="text-align: right;" >Egreso</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let detalle of listaDetallePlanilla ; index as i">
           <th scope="row">{{i+1}}</th>
           <td>{{detalle.CONCEPTO}}</td>
-          <td style="text-align: right;">{{detalle.MONTO_CONCEPTO  | currency }}</td>
+          <td style="text-align: right;">{{detalle.INGRESO  | currency }}</td>
+          <td style="text-align: right;">{{detalle.EGRESO  | currency }}</td>
         </tr>
       </tbody>
+      <tfoot>
+        <tr style="text-align: right;">
+          <td>TOTALES</td>
+          <td></td>
+          <td>{{suma | number : '1.2-2' }}</td>
+          <td>{{sumaEgreso | number : '1.2-2'}}</td>
+        </tr>
+      </tfoot>
     </table>
   </div>
 </app-ui-modal>
