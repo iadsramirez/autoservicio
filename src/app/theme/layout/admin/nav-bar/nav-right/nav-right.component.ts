@@ -40,6 +40,7 @@ export class NavRightComponent implements OnInit, DoCheck {
   tempuser:Array<any>;
 
   constructor(private router:Router,private autoServicio:AutogestionService) {
+    this.autoServicio.logeado=true;
     this.visibleUserList = false;
     this.chatMessage = false;
     this.gradientConfig = GradientConfig.config;

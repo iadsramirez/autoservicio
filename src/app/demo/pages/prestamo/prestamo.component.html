@@ -1,5 +1,9 @@
+<div class="row my-5 col-md-12">
+</div>
+<div class="row my-5 col-md-12">
+</div>
 <div class="col-md-12">
-  <app-card cardTitle="Estado de Cuenta" [options]="false">
+  <app-card cardTitle="Detalle de prestamo" [options]="false">
     <div class="row">
       <div class="col-md-12">
         <div class="table-responsive">
@@ -11,31 +15,24 @@
                 <th scope="col">Tipo</th>
                 <th scope="col">Descripcion</th>
                 <th scope="col" style="text-align: right;">Saldo Actual</th>
-                <th scope="col" style="text-align: right;" >Valor</th>
+                <th scope="col" style="text-align: right;">Valor</th>
                 <th scope="col">Fecha</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of listadoPrestamo  | paginate: { id: 'foo',  itemsPerPage: 5,currentPage: p}" (click)="llenarDetalle(item)"
-              data-toggle="modal" (click)="myLargeModalLabel.show()"
-              >
+              <tr *ngFor="let item of listadoPrestamo  | paginate: { id: 'foo',  itemsPerPage: 5,currentPage: p}"
+                (click)="llenarDetalle(item)" data-toggle="modal" (click)="myLargeModalLabel.show()">
                 <td scope="row">{{item.CORRELATIVO}}</td>
                 <td scope="row">{{item.DES_DP}}</td>
                 <td scope="row">{{item.DESCRIPCION}}</td>
-                <td scope="row" style="text-align: right;" >{{item.SALDO_ACTUAL | currency}}</td>
-                <td scope="row" style="text-align: right;" >{{item.VALOR_PRESTA | currency}}</td>
-                <td scope="row">{{item.FEC_INICIO | date: 'dd/MM/yyyy' }}</td>
+                <td scope="row" style="text-align: right;">{{item.SALDO_ACTUAL | number : '1.0-2'}}</td>
+                <td scope="row" style="text-align: right;">{{item.VALOR_PRESTA | number : '1.0-2'}}</td>
+                <td scope="row">{{item.FEC_INICIO }}</td>
               </tr>
             </tbody>
-        </table>
-        <pagination-controls id="foo" (pageChange)="p = $event"
-        maxSize="9"
-        directionLinks="true"
-        autoHide="true"
-        responsive="true"
-        previousLabel="Anterior"
-        nextLabel="Siguiente"
-        ></pagination-controls>
+          </table>
+          <pagination-controls id="foo" (pageChange)="p = $event" maxSize="9" directionLinks="true" autoHide="true"
+            responsive="true" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
 
 
         </div>
@@ -56,58 +53,94 @@
 <app-ui-modal #myLargeModalLabel [hideFooter]="true" [dialogClass]="'modal-lg'">
   <div class="app-modal-header">
     <h5 class="modal-title">Detalle Estado de Cuenta</h5>
-    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="myLargeModalLabel.hide()"><span aria-hidden="true">&times;</span></button>
+    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close"
+      (click)="myLargeModalLabel.hide()"><span aria-hidden="true">&times;</span></button>
   </div>
   <div class="app-modal-body" style="overflow-x: auto">
-    <table class="table table-hover table-primary">
+    <div class="container float-right col-xs-12 col-md-12">
+      <span class="col-xs-6 col-md-6" style="color: blue;"><strong>TOTALES</strong></span>
+      <span class="col-xs-6 col-md-6" style="color: blue;"><strong>CARGO:{{cargo | number : '1.2-2' }}</strong></span>
+      <span class="col-xs-6 col-md-6" style="color: blue;"><strong>ABONO:{{abono | number : '1.2-2' }}</strong></span>
+      <span class="col-xs-12 col-md-12" *ngIf="listaDescuentoCiclico?.length >0 "> <button
+          class="btn btn-primary btn-sm" (click)="myDescuentoCiclico.show()">Detalle de Cuotas</button></span>
+    </div>
+
+    <table class="table table-hover table-primary my-5">
       <thead style="color: white;background-color:black;">
-        <tr  >
-          <th scope="col">No Movimiento</th>
+        <tr>
+          <th scope="col">Movimiento</th>
           <th scope="col">Tipo Planilla</th>
           <th scope="col">Año</th>
           <th scope="col">Mes</th>
-          <th scope="col">No Planilla</th>
+          <th scope="col">Planilla</th>
           <th scope="col">Fecha</th>
-          <th scope="col" style="text-align: right;" >Cargo</th>
-          <th scope="col" style="text-align: right;" >Abono</th>
-          <th scope="col" style="text-align: right;" >Saldo</th>
+          <th scope="col" style="text-align: right;">Cargo</th>
+          <th scope="col" style="text-align: right;">Abono</th>
+          <th scope="col" style="text-align: right;">Saldo</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let detalle of listaDetallePrestamo | paginate: { id: 'foo2',  itemsPerPage: 5,currentPage: p} ; index as i ">
+        <tr
+          *ngFor="let detalle of listaDetallePrestamo | paginate: { id: 'foo2',  itemsPerPage: 5,currentPage: p} ; index as i ">
           <td>{{detalle.NO_MOV}}</td>
           <td>{{detalle.NOM_TIPOPLA}}</td>
           <td>{{detalle.ANIO}}</td>
           <td>{{detalle.MES}}</td>
           <td>{{detalle.NUM_PLANILLA}}</td>
-          <td>{{detalle.FECHA  | date:'dd/MM/yyyy'}}</td>
-          <td style="text-align: right;"  >{{detalle.CARGO | currency }}</td>
-          <td style="text-align: right;"  >{{detalle.ABONO | currency }}</td>
-          <td style="text-align: right;"  >{{detalle.SALDO | currency }}</td>
+          <td>{{detalle.FECHA | date:'dd/MM/yyyy'}}</td>
+          <td style="text-align: right;">{{detalle.CARGO | number : '1.0-2' }}</td>
+          <td style="text-align: right;">{{detalle.ABONO | number : '1.0-2' }}</td>
+          <td style="text-align: right;">{{detalle.SALDO | number : '1.0-2' }}</td>
         </tr>
       </tbody>
-      <tfoot>
-        <tr>
-            <td style="font-weight: bolder;">{{'TOTALES'}}</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td style="text-align: right;font-weight: bolder;" >{{cargo  | number : '1.2-2' }}</td>
-            <td style="text-align: right;font-weight: bolder;" >{{abono  | number : '1.2-2' }}</td>
-            <td style="text-align: right;font-weight: bolder;" >{{saldo  | number : '1.2-2' }}</td>
-        </tr>
-      </tfoot>
+
     </table>
 
-    <pagination-controls id="foo2" (pageChange)="p = $event"
-    maxSize="9"
-    directionLinks="true"
-    autoHide="true"
-    responsive="true"
-    previousLabel="Anterior"
-    nextLabel="Siguiente"
-    ></pagination-controls>
+    <pagination-controls id="foo2" (pageChange)="p = $event" maxSize="9" directionLinks="true" autoHide="true"
+      responsive="true" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+  </div>
+</app-ui-modal>
+
+
+
+
+
+<app-ui-modal #myDescuentoCiclico [hideFooter]="true" [dialogClass]="'modal-lg'">
+  <div class="app-modal-header">
+    <h5 class="modal-title">Detalle Cuotas</h5>
+    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close"
+      (click)="myDescuentoCiclico.hide()"><span aria-hidden="true">&times;</span></button>
+  </div>
+  <div class="app-modal-body" style="overflow-x: auto">
+    <table class="table table-hover table-primary my-2">
+      <thead style="color: white;background-color:black;">
+        <tr>
+          <th scope="col">Cuota</th>
+          <th scope="col">Año</th>
+          <th scope="col">Mes</th>
+          <th scope="col">Tipo</th>
+          <th scope="col">Estado</th>
+          <th scope="col" style="text-align: right;">Monto</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let detalle of listaDescuentoCiclico | paginate: { id: 'foo3',  itemsPerPage: 5,currentPage: p} ; index as i ">
+          <td>{{detalle.NO_CUOTA}}</td>
+          <td>{{detalle.ANIO}}</td>
+          <td>{{detalle.MES}}</td>
+          <td>{{detalle.TIPO}}</td>
+          <td>{{detalle.ESTADO}}</td>
+          <td style="text-align: right;">{{detalle.MONTO | number : '1.0-2' }}</td>
+        </tr>
+      </tbody>
+
+    </table>
+
+    <pagination-controls id="foo3" (pageChange)="p = $event" maxSize="9" directionLinks="true" autoHide="false"
+      responsive="true" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+    <div class="col-xs-12 col-md-12 my-2">
+      <span style="color: blue;font-weight: bolder;" class="float-right">Total: {{montoCiclico | number : '1.0-2'}}</span>
+    </div>
   </div>
 </app-ui-modal>

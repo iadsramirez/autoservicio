@@ -1,4 +1,8 @@
 
+<div class="row my-5 col-md-12">
+</div>
+<div class="row my-5 col-md-12">
+</div>
 
 <div class="row">
   <div class="col-sm-12">
@@ -35,7 +39,7 @@
               {{item.OBSERVACION}}
             </td>
             <td>
-              {{item.FECHA | date:'dd/MM/yyyy'}}
+              {{item.FECHA  | date: 'dd/MM/yyyy' : '+18'}}
             </td>
             <td>
               <span *ngIf="item.STATUS=='G'">Generado</span>

@@ -24,8 +24,12 @@ export class AutogestionService {
     return this.http.get(environment.baseURl + 'parentescos/' + cia);
   }
 
-  obtenerEmergencias(cia: any, codEmp: any): Observable<any> {
-    return this.http.get(environment.baseURl + 'tempEmergenciasEmp/' + cia + '/' + codEmp);
+  obtenerEmergencias(cia: any, codEmp: any): Observable<any> { ///tempEmergenciasEmp
+    return this.http.get(environment.baseURl + 'emergenciasEmp/' + cia + '/' + codEmp);
+  }
+
+  obtenerEmergenciasDB(cia: any, codEmp: any): Observable<any> {
+    return this.http.get(environment.baseURl + 'emergenciasEmp/' + cia + '/' + codEmp);
   }
 
 
@@ -134,10 +138,11 @@ export class AutogestionService {
 
 
 
-  obtenerDetallePlanilla(cia: number, anio: number, mes: number
-    , tipoPla: number, numPla: number, codEmp: number
+  obtenerDetallePlanilla(cia: number, anio: number, mes: number , tipoPla: number, numPla: number, codEmp: number
   ): Observable<any> {
-    return this.http.get(environment.baseURl + 'detallePlanilla/' + cia + '/' + anio + '/' + mes + '/' + tipoPla + '/' + numPla + '/' + codEmp);
+    return this.
+    http.
+    get(environment.baseURl + 'detallePlanilla/' + cia + '/' + anio + '/' + mes + '/' + tipoPla + '/' + numPla + '/' + codEmp);
 
   }
 
@@ -155,6 +160,26 @@ export class AutogestionService {
 
   obtenerNivelAcademicoEmp(cia:number,emp:number): Observable<any> {
     return this.http.get(environment.baseURl + 'tempNivelAcademico'+'/'+cia+'/'+emp);
+  }
+
+
+
+  obtenerNivelAcademicoDB(cia:number,emp:number): Observable<any> {
+    return this.http.get(environment.baseURl + 'nivelAcademico'+'/'+cia+'/'+emp);
+  }
+
+
+  controlVacacion(cia:number,emp:number): Observable<any> {
+    return this.http.get(environment.baseURl + 'vacaciones'+'/'+cia+'/'+emp);
+  }
+
+  controlVacacionDetalle(cia:number,emp:number,anio:number):Observable<any>{
+    return this.http.get(environment.baseURl + 'detvacaciones'+'/'+cia+'/'+emp+'/'+anio);
+  }
+
+
+  descuentosCiclico(cia:number,prestamo:number): Observable<any>{
+    return this.http.get(environment.baseURl + 'cuotasprestamo'+'/'+cia+'/'+prestamo);
   }
 
 

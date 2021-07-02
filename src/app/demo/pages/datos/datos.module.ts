@@ -15,8 +15,7 @@ import { NgxMaskModule } from 'ngx-mask';
 @NgModule({
   declarations: [DatosComponent],
   imports: [NgxPaginationModule,FormsModule,NgbModule.forRoot(),
-    CommonModule,DatosRoutingModule,AccordionModule
-    ,
+    CommonModule,DatosRoutingModule,AccordionModule,
     SharedModule,
     NgxMaskModule.forRoot()
   ]

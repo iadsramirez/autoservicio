@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbAccordionConfig, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
-import { AutogestionService } from '../../../servicio/autogestion.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { AutogestionService } from 'src/app/servicio/autogestion.service';
+import { Generales } from '../datos/modelo/Generales';
 import swal from 'sweetalert2';
-import { ObjeNivel } from '../modelos/ObjeNivel';
-import { filter, map, pairwise, startWith } from 'rxjs/operators';
-import { Generales } from './modelo/Generales';
 import { NgbDateFRParserFormatter } from '../configuracion/ngb-date-fr-parser-formatter';
 
 @Component({
-  selector: 'app-datos',
-  templateUrl: './datos.component.html',
-  styleUrls: ['./datos.component.scss'],
-  providers: [NgbAccordionConfig, { provide: NgbDateParserFormatter, useClass: NgbDateFRParserFormatter }]
+  selector: 'app-expediente',
+  templateUrl: './expediente.component.html',
+  styleUrls: ['./expediente.component.scss'],
+  providers: [
+    { provide: NgbDateParserFormatter, useClass: NgbDateFRParserFormatter }
+  ]
 })
-export class DatosComponent implements OnInit {
+export class ExpedienteComponent implements OnInit {
 
   p: number = 1;
   listaAutoGestion: Array<any> = [];
@@ -72,11 +72,11 @@ export class DatosComponent implements OnInit {
       this.autoGestion.obtenerParentesco(this.empleado[0].COD_CIA).subscribe(data => this.listaParentesco = data);
       this.autoGestion.obtenerEmergencias(this.empleado[0].COD_CIA, this.empleado[0].COD_EMP).subscribe(eme => {
         this.emergencias = eme;
-        this.autoGestion.obtenerEmergenciasDB(this.empleado[0].COD_CIA, this.empleado[0].COD_EMP).subscribe(
+        /*this.autoGestion.obtenerEmergenciasDB(this.empleado[0].COD_CIA, this.empleado[0].COD_EMP).subscribe(
           emeDb => {
             this.emergencias = this.emergencias.concat(emeDb);
           }
-        );
+        );*/
       });
 
       this.autoGestion.obtenerEstadoCivil().subscribe(data => this.listaEstadoCivil = data);
@@ -479,11 +479,11 @@ export class DatosComponent implements OnInit {
           console.log('rep emergencia:' + JSON.stringify(emergencia));
           this.autoGestion.obtenerEmergencias(this.empleado[0].COD_CIA, this.empleado[0].COD_EMP).subscribe(eme => {
             this.emergencias = eme;
-            this.autoGestion.obtenerEmergenciasDB(this.empleado[0].COD_CIA, this.empleado[0].COD_EMP).subscribe(
+           /* this.autoGestion.obtenerEmergenciasDB(this.empleado[0].COD_CIA, this.empleado[0].COD_EMP).subscribe(
               emeDbs => {
                 this.emergencias = this.emergencias.concat(emeDbs);
               }
-            );
+            );*/
           });
           swal.fire({ toast: true, position: 'top-end', showConfirmButton: false, timer: 3000, title: 'Emergencia!', text: 'Emergencia Agregada', icon: 'success', });
 
@@ -600,7 +600,6 @@ export class DatosComponent implements OnInit {
   obtenerNivelAcademico(param: any) {
     console.log('OBJETO' + JSON.stringify(param));
   }
-
 
 
 

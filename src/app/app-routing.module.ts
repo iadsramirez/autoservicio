@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { ExpedienteComponent } from './demo/pages/expediente/expediente.component';
 import { ThemeHorizontalComponent } from './demo/pages/layout/theme-horizontal/theme-horizontal.component';
 import { AdminComponent } from './theme/layout/admin/admin.component';
 import {AuthComponent} from './theme/layout/auth/auth.component';
@@ -76,8 +77,14 @@ const routes: Routes = [
       },{
         path: 'capacitacion',
         loadChildren: () => import('./demo/pages/accion/accion.module').then(module => module.AccionModule)
+      },{
+        path: 'vacacion',
+        loadChildren: () => import('./demo/pages/vacacion/vacacion.module').then(module => module.VacacionModule)
+      },{
+        path: 'expediente', loadChildren: () => import('./demo/pages/expediente/expediente.module').then(module => module.ExpedienteModule)
       }
     ]
+
   },
   {
     path: '',

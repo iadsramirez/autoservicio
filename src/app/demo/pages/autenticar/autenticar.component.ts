@@ -55,7 +55,8 @@ export class AutenticarComponent implements OnInit {
             showConfirmButton: false,
             timer: 1500
           }).then((result) => {
-            this.router.navigate(['/menu-principal']);
+            //this.router.navigate(['/menu-principal']);
+            this.router.navigate(['/planilla']);
           });
         }
         this.autoGestionService.logeado = true;

@@ -299,13 +299,12 @@ const MenuApp = [
        url: '/cita',
        icon: 'feather icon-sidebar',
        breadcrumbs: false
-     },
-     {
+     },{
       id: 'dashboard',
       title: 'Expediente',
       type: 'item',
-      url: '/datos',
-      icon: 'feather icon-sidebar',
+      url: '/expediente',
+      icon: 'feather icon-monitor',
       breadcrumbs: false
     },
     {
@@ -322,8 +321,15 @@ const MenuApp = [
     url: '/capacitacion',
     icon: 'feather icon-sidebar',
     breadcrumbs: false
+  },{
+    id: 'dashboard',
+    title: 'Control de Vacaciones',
+    type: 'item',
+    url: '/vacacion',
+    icon: 'feather icon-monitor',
+    breadcrumbs: false
   }
-      
+
     ]
   }
 

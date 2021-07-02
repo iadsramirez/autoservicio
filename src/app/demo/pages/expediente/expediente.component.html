@@ -11,7 +11,7 @@
 
   <div class="card">
 
-    <div class="card-body" >
+    <div class="card-body" style="background-color: rgb(201, 201, 201);" >
 
         <ngb-accordion #acc="ngbAccordion" activeIds="config-panel-one" type="light"  >
             <ngb-panel  title="Ficha Empleado"  id="config-panel-one">
@@ -390,23 +390,26 @@
 
                           <div class="card" >
                             <div class="card-body">
-                              <table class="table table-hover">
-                                <thead>
-                                  <tr>
-                                    <th scope="col">Nombre</th>
-                                    <th scope="col">Telefono</th>
-                                    <th scope="col">Parentesco</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <tr  *ngFor="let item of emergencias" >
-                                    <td>{{item.NOMBRE}}</td>
-                                    <td>{{item.TELEFONO}}</td>
-                                    <td>{{item.COD_PARENTESCO}}</td>
-                                  </tr>
+                              <div class="table-responsive">
+                                <table class="table table-hover">
+                                  <thead>
+                                    <tr>
+                                      <th scope="col">Nombre</th>
+                                      <th scope="col">Telefono</th>
+                                      <th scope="col">Parentesco</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr  *ngFor="let item of emergencias" >
+                                      <td>{{item.NOMBRE}}</td>
+                                      <td>{{item.TELEFONO}}</td>
+                                      <td>{{item.COD_PARENTESCO}}</td>
+                                    </tr>
 
-                                </tbody>
-                              </table>
+                                  </tbody>
+                                </table>
+                              </div>
+
                             </div>
                           </div>
 
@@ -512,29 +515,37 @@
                         <div class="card my-2">
 
                           <div class="card-body">
-                            <table class="table table-hover">
-                              <thead>
-                                <tr>
-                                  <th scope="col">Institucion</th>
-                                  <th scope="col">Descripcion</th>
-                                  <th scope="col">Fecha</th>
-                                  <th scope="col">Horas Recibidas</th>
-                                  <th scope="col">Tipo Documento</th>
-                                  <th scope="col">Nota</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr *ngFor="let item of listaCapacitaciones" >
-                                  <td>{{item.NOM_INSTITUCION}}</td>
-                                  <td>{{item.DESCRIPCION}}</td>
-                                  <td>{{item.FECHA}}</td>
-                                  <td>{{item.HORAS_RECIBIDAS}}</td>
-                                  <td>{{item.DOCUMENTO_VALIDA}}</td>
-                                  <td>{{item.NOTA}}</td>
-                                </tr>
+                            <div class="table-responsive">
 
-                              </tbody>
-                            </table>
+                              <table class="table table-hover">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">Institucion</th>
+                                    <th scope="col">Descripcion</th>
+                                    <th scope="col">Fecha</th>
+                                    <th scope="col">Horas Recibidas</th>
+                                    <th scope="col">Tipo Documento</th>
+                                    <th scope="col">Nota</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr *ngFor="let item of listaCapacitaciones" >
+                                    <td>{{item.NOM_INSTITUCION}}</td>
+                                    <td>{{item.DESCRIPCION}}</td>
+                                    <td>{{item.FECHA}}</td>
+                                    <td>{{item.HORAS_RECIBIDAS}}</td>
+                                    <td>{{item.DOCUMENTO_VALIDA}}</td>
+                                    <td>{{item.NOTA}}</td>
+                                  </tr>
+
+                                </tbody>
+                              </table>
+
+                            </div>
+
+
+
+
                           </div>
                         </div>
 

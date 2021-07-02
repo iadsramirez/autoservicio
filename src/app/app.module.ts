@@ -29,6 +29,8 @@ import { ToggleFullScreenDirective } from './theme/shared/full-screen/toggle-ful
 import { NavigationItem } from './theme/layout/admin/navigation/navigation';
 import { NgbButtonsModule, NgbDropdownModule, NgbTabsetModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { AutenticarComponent } from './demo/pages/autenticar/autenticar.component';
+//import { ExpedienteComponent } from './demo/pages/expediente/expediente.component';
+//import { VacacionComponent } from './demo/pages/vacacion/vacacion.component';
 //import { AccionComponent } from './demo/pages/accion/accion.component';
 
 
@@ -53,6 +55,8 @@ import { AutenticarComponent } from './demo/pages/autenticar/autenticar.componen
     ConfigurationComponent,
     ToggleFullScreenDirective,
     AutenticarComponent,
+   // ExpedienteComponent,
+    //VacacionComponent,
   ///  AccionComponent
    // CitasComponent,
   ],

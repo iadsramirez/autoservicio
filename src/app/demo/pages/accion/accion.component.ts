@@ -11,7 +11,7 @@ export class AccionComponent implements OnInit {
   listadoAccionesRecibidas:Array<any>;
   empleado:any;
 
-  constructor(private autoGestion:AutogestionService) { 
+  constructor(private autoGestion:AutogestionService) {
     this.autoGestion.logeado = true;
     this.empleado = JSON.parse(localStorage.getItem('empleadoSession'));
     this.autoGestion.obtenerCapacitaciones(this.empleado[0].COD_CIA,this.empleado[0].COD_EMP)
@@ -24,6 +24,7 @@ export class AccionComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.autoGestion.logeado = true;
   }
 
 }
