@@ -25,8 +25,8 @@
                 <td scope="row">{{item.CORRELATIVO}}</td>
                 <td scope="row">{{item.DES_DP}}</td>
                 <td scope="row">{{item.DESCRIPCION}}</td>
-                <td scope="row" style="text-align: right;">{{item.SALDO_ACTUAL | number : '1.0-2'}}</td>
-                <td scope="row" style="text-align: right;">{{item.VALOR_PRESTA | number : '1.0-2'}}</td>
+                <td scope="row" style="text-align: right;">{{item.SALDO_ACTUAL | number : '1.2-2'}}</td>
+                <td scope="row" style="text-align: right;">{{item.VALOR_PRESTA | number : '1.2-2'}}</td>
                 <td scope="row">{{item.FEC_INICIO }}</td>
               </tr>
             </tbody>
@@ -57,15 +57,10 @@
       (click)="myLargeModalLabel.hide()"><span aria-hidden="true">&times;</span></button>
   </div>
   <div class="app-modal-body" style="overflow-x: auto">
-    <div class="container float-right col-xs-12 col-md-12">
-      <span class="col-xs-6 col-md-6" style="color: blue;"><strong>TOTALES</strong></span>
-      <span class="col-xs-6 col-md-6" style="color: blue;"><strong>CARGO:{{cargo | number : '1.2-2' }}</strong></span>
-      <span class="col-xs-6 col-md-6" style="color: blue;"><strong>ABONO:{{abono | number : '1.2-2' }}</strong></span>
-      <span class="col-xs-12 col-md-12" *ngIf="listaDescuentoCiclico?.length >0 "> <button
-          class="btn btn-primary btn-sm" (click)="myDescuentoCiclico.show()">Detalle de Cuotas</button></span>
-    </div>
+    <span class="col-xs-12 col-md-12" *ngIf="listaDescuentoCiclico?.length >0 "> <button
+      class="btn btn-primary btn-sm" (click)="myDescuentoCiclico.show()">Detalle de Cuotas</button></span>
 
-    <table class="table table-hover table-primary my-5">
+    <table class="table table-hover table-primary my-2">
       <thead style="color: white;background-color:black;">
         <tr>
           <th scope="col">Movimiento</th>
@@ -88,9 +83,9 @@
           <td>{{detalle.MES}}</td>
           <td>{{detalle.NUM_PLANILLA}}</td>
           <td>{{detalle.FECHA | date:'dd/MM/yyyy'}}</td>
-          <td style="text-align: right;">{{detalle.CARGO | number : '1.0-2' }}</td>
-          <td style="text-align: right;">{{detalle.ABONO | number : '1.0-2' }}</td>
-          <td style="text-align: right;">{{detalle.SALDO | number : '1.0-2' }}</td>
+          <td style="text-align: right;">{{detalle.CARGO | number : '1.2-2' }}</td>
+          <td style="text-align: right;">{{detalle.ABONO | number : '1.2-2' }}</td>
+          <td style="text-align: right;">{{detalle.SALDO | number : '1.2-2' }}</td>
         </tr>
       </tbody>
 
@@ -98,6 +93,14 @@
 
     <pagination-controls id="foo2" (pageChange)="p = $event" maxSize="9" directionLinks="true" autoHide="true"
       responsive="true" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+
+      <div class="float-right">
+        <span class="col-xs-6 col-md-6" style="color: blue;"><strong>TOTALES</strong></span>
+        <span class="col-xs-6 col-md-6" style="color: blue;"><strong>CARGO:{{cargo | number : '1.2-2' }}</strong></span>
+        <span class="col-xs-6 col-md-6" style="color: blue;"><strong>ABONO:{{abono | number : '1.2-2' }}</strong></span>
+
+      </div>
+
   </div>
 </app-ui-modal>
 
